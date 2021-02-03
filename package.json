@@ -1,0 +1,20 @@
+{
+  "name": "mern-blog",
+  "version": "1.0.0",
+  "description": "This is a blog about different topics",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js", 
+    "client": "npm start --prefix client",
+    "dev": "concurrently \" npm run server \" \" npm run client \""
+  },
+  "author": "Mohannad Zitoun",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
