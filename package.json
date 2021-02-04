@@ -8,7 +8,9 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \" npm run server \" \" npm run client \""
+    "dev": "concurrently \" npm run server \" \" npm run client \"",
+    "data:import": "node seeder.js",
+    "data:destroy": "node seeder -d"
   },
   "author": "Mohannad Zitoun",
   "license": "ISC",
@@ -16,6 +18,7 @@
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.11.14",
     "nodemon": "^2.0.7"
   }

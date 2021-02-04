@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
+import Post from './models/postModel.js';
+import postRoutes from './routes/postRoutes.js';
 
 dotenv.config();
 
@@ -8,9 +11,10 @@ connectDB();
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send({ msg: 'Hello There' });
-});
+app.use('/api/posts', postRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
