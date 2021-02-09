@@ -12,7 +12,7 @@ export const StyledHomeScreen = styled.div`
   }
 `;
 
-export const StyledContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   height: 100%;
   flex-wrap: wrap;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledPostDetail = styled.div`
+export const PostDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -25,19 +25,19 @@ export const ImageContainer = styled.div`
   max-width: 100%;
 `;
 
-export const StyledImg = styled.img`
+export const Img = styled.img`
   width: 100%;
   border-radius: 5px;
 `;
 
-export const StyledTitle = styled.h1`
+export const Title = styled.h1`
   font-weight: 200;
   letter-spaceing: 1px;
   line-height: 1.3;
   margin: 10px 0;
 `;
 
-export const StyledText = styled.p`
+export const Text = styled.p`
   letter-spacing: 1px;
   line-height: 1.5;
   margin: 20px 0;

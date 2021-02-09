@@ -21,12 +21,12 @@ export const ImageContainer = styled.div`
   height: 215px;
 `;
 
-export const StyledImg = styled.img`
+export const Img = styled.img`
   width: 100%;
   border-radius: 5px;
 `;
 
-export const StyledPostContent = styled.div`
+export const PostContent = styled.div`
   display: flex:
   flex-direction: column;
   justify-content: space-between;
@@ -45,7 +45,7 @@ export const ReadMoreButton = styled.button`
   color: ${({ theme }) => theme.secondaryBlue};
 `;
 
-export const StyledCategoryLink = styled(Link)`
+export const CategoryLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.darkGrey};
   background-color: ${({ theme }) => theme.lightGrey};
@@ -54,14 +54,14 @@ export const StyledCategoryLink = styled(Link)`
   font-weight: 200;
 `;
 
-export const StyledParagraph = styled.p`
+export const Paragraph = styled.p`
   font-size: 14px;
   letter-spacing: 1px;
   line-height: 1.5;
   margin: 20px 0;
 `;
 
-export const StyledTitle = styled.h2`
+export const Title = styled.h2`
   font-weight: 200;
   letter-spaceing: 1px;
   line-height: 1.3;

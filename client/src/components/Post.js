@@ -2,30 +2,27 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   StyledPost,
-  StyledImg,
-  ReadMoreButton,
-  StyledParagraph,
-  StyledTitle,
-  StyledPostContent,
-  StyledCategoryLink,
+  Img,
+  Paragraph,
+  Title,
+  PostContent,
+  CategoryLink,
   ImageContainer,
 } from './Post.styled.js';
 
-const Post = ({ post: { title, img, content, category, _id } }) => {
+const Post = ({ post: { title, img, category, _id } }) => {
   return (
     <StyledPost>
-      <StyledPostContent>
+      <PostContent>
         <ImageContainer>
           <Link to={`/post/${_id}`}>
-            <StyledImg src={img} alt={title} />
+            <Img src={img} alt={title} />
           </Link>
         </ImageContainer>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledParagraph></StyledParagraph>
-        <StyledCategoryLink to='/api/posts/category'>
-          {category}
-        </StyledCategoryLink>
-      </StyledPostContent>
+        <Title>{title}</Title>
+        <Paragraph></Paragraph>
+        <CategoryLink to='/api/posts/category'>{category}</CategoryLink>
+      </PostContent>
     </StyledPost>
   );
 };

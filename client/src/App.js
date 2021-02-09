@@ -10,8 +10,8 @@ import PostScreen from './components/screens/PostScreen';
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Router>
         <GlobalStyles openHamburgerMenu={openHamburgerMenu} />
         <div>
           <Navbar
@@ -21,8 +21,8 @@ const App = () => {
           <Route exact path='/' component={HomeScreen} />
           <Route path='/post/:id' component={PostScreen} />
         </div>
-      </ThemeProvider>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 };
 

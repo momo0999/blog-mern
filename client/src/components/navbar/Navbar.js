@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import Hamburger from 'hamburger-react';
 import {
   StyledNavbar,
-  StyledList,
+  List,
   StyledLink,
   StyledShoppingCartIcon,
   StyledAccountCircleIcon,
   Logo,
   StyledSearchIcon,
-  StyledBurgerButton,
+  BurgerButton,
   RowContainer,
   LinksContainer,
 } from './Navbar.styled';
@@ -35,15 +35,15 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   return (
     <StyledNavbar>
       <Logo>Logo</Logo>
-      <StyledBurgerButton ref={ref}>
+      <BurgerButton ref={ref}>
         <Hamburger
           toggled={openHamburgerMenu}
           toggle={() => setOpenHamburgerMenu((prevValue) => !prevValue)}
           size={30}
         />
-      </StyledBurgerButton>
+      </BurgerButton>
       <RowContainer>
-        <StyledList ref={menuRef} openHamburgerMenu={openHamburgerMenu}>
+        <List ref={menuRef} openHamburgerMenu={openHamburgerMenu}>
           <li>
             <StyledLink ref={linkRef} to='/'>
               Blog
@@ -75,7 +75,7 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
               </StyledLink>
             </li>
           </LinksContainer>
-        </StyledList>
+        </List>
       </RowContainer>
     </StyledNavbar>
   );

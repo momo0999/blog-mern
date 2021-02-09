@@ -19,7 +19,7 @@ export const RowContainer = styled.div`
   justify-content: end;
 `;
 
-export const StyledList = styled.ul`
+export const List = styled.ul`
   position: relative;
   display: flex;
   justify-content: center;
@@ -45,7 +45,7 @@ export const StyledList = styled.ul`
     transition: transform 0.4s ease-in, width 0.2s ease-in;
   }
 `;
-export const StyledListIcons = styled.ul`
+export const ListIcons = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,7 +105,7 @@ export const LinksContainer = styled.div`
   display: flex;
 `;
 
-export const StyledBurgerButton = styled.button`
+export const BurgerButton = styled.button`
   display: none;
   @media (max-width: ${({ theme }) => theme.mobileFirstShowCase}) {
     position: absolute;

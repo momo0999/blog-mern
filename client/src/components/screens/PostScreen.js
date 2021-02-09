@@ -1,37 +1,39 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostDetail } from '../../actions/postActions';
-import { StyledCategoryLink } from '../Post.styled';
+import { CategoryLink } from '../Post.styled';
 import {
   ImageContainer,
-  StyledImg,
-  StyledPostDetail,
-  StyledTitle,
-  StyledText,
+  Img,
+  PostDetail,
+  Title,
+  Text,
 } from './PostScreen.styled';
 
 const PostScreen = ({ match }) => {
   const dispatch = useDispatch();
   const postDetail = useSelector((state) => state.postDetail);
-  const { post, loading, error } = postDetail;
+  const {
+    post: { title, img, content, category },
+    loading,
+    error,
+  } = postDetail;
   useEffect(() => {
     dispatch(fetchPostDetail(match.params.id));
   }, [dispatch, match]);
   return (
-    <StyledPostDetail>
+    <PostDetail>
       {loading && <h1>Loading...</h1>}
       {error && <h1>{error}</h1>}
       <ImageContainer>
-        <StyledImg src={post.img} alt='' />
+        <Img src={img} alt='' />
       </ImageContainer>
       <div>
-        <StyledTitle>{post.title}</StyledTitle>
-        <StyledText>{post.content}</StyledText>
-        <StyledCategoryLink to='/posts/category/:id'>
-          {post.category}
-        </StyledCategoryLink>
+        <Title>{title}</Title>
+        <Text>{content}</Text>
+        <CategoryLink to='/posts/category/:id'>{category}</CategoryLink>
       </div>
-    </StyledPostDetail>
+    </PostDetail>
   );
 };
 
