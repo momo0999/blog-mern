@@ -5,13 +5,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
 
 export const StyledNavbar = styled.div`
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 8vh;
   width: 100%;
   background-color: white;
+  padding-bottom: 50px;
 `;
 
 export const RowContainer = styled.div`
@@ -20,33 +20,29 @@ export const RowContainer = styled.div`
 `;
 
 export const StyledList = styled.ul`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
   overflow: hidden;
-  @media (max-width: ${({ theme }) => theme.mobile}) {
-    body {
-      overflow-x: hidden;
-    }
-    &.navbar__links {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      right: 0;
-      top: 8vh;
-      padding: 0;
-      height: 92vh;
-      width: ${({ openHamburgerMenu }) => (!openHamburgerMenu ? '0' : '100%')};
-      font-size: 20px;
-      opacity: 0.8;
-      overflow-x: hidden;
-      transform: ${({ openHamburgerMenu }) =>
-        !openHamburgerMenu ? 'translateX(-100%)' : 'translateX(0)'};
-      transition: transform 0.4s ease-in, width 0.2s ease-in;
-    }
+  @media (max-width: ${({ theme }) => theme.mobileFirstShowCase}) {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: ${({ openHamburgerMenu }) => (!openHamburgerMenu ? '0' : '100%')};
+    font-size: 18px;
+    background-color: white;
+    transform: ${({ openHamburgerMenu }) =>
+      !openHamburgerMenu ? 'translateX(-100%)' : 'translateX(0)'};
+    transition: transform 0.4s ease-in, width 0.2s ease-in;
   }
 `;
 export const StyledListIcons = styled.ul`
@@ -78,9 +74,7 @@ export const StyledLink = styled(Link)`
 
 export const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   color: ${({ theme }) => theme.primaryFontColor};
-  margin-right: 40px;
   vertical-align: middle;
-
   &:hover {
     color: ${({ theme }) => theme.primaryBlue};
     transition: color 0.2s ease-in;
@@ -107,15 +101,21 @@ export const StyledSearchIcon = styled(SearchIcon)`
   }
 `;
 
+export const LinksContainer = styled.div`
+  display: flex;
+`;
+
 export const StyledBurgerButton = styled.button`
   display: none;
-  @media (max-width: ${({ theme }) => theme.mobile}) {
+  @media (max-width: ${({ theme }) => theme.mobileFirstShowCase}) {
     position: absolute;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     right: 0;
     z-index: 1;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     border: none;
     background-color: transparent;
   }
