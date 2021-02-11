@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import posts from './data/posts.js';
-import Post from './models/postModel.js';
+import images from './data/images.js';
+import Photo from './models/photoModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
@@ -10,13 +10,13 @@ connectDB();
 
 const importData = async () => {
   try {
-    await Post.deleteMany();
+    await Photo.deleteMany();
 
-    const samplePosts = posts.map((post) => {
-      return { ...post };
+    const sampleImages = images.map((image) => {
+      return { ...image };
     });
 
-    await Post.insertMany(samplePosts);
+    await Photo.insertMany(sampleImages);
 
     console.log('Data Imported!');
     process.exit();

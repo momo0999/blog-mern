@@ -2,8 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
-import Post from './models/postModel.js';
 import postRoutes from './routes/postRoutes.js';
+import imagesRoutes from './routes/imagesRoutes.js';
 
 dotenv.config();
 
@@ -12,6 +12,7 @@ connectDB();
 const app = express();
 
 app.use('/api/posts', postRoutes);
+app.use('/api/images', imagesRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
