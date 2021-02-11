@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const StyledPost = styled.div`
   display: flex;
@@ -35,23 +34,6 @@ export const PostContent = styled.div`
   max-width: 380px
   padding: 15px 0;
  
-`;
-
-export const ReadMoreButton = styled.button`
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 13px;
-  color: ${({ theme }) => theme.secondaryBlue};
-`;
-
-export const CategoryLink = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.darkGrey};
-  background-color: ${({ theme }) => theme.lightGrey};
-  padding: 5px 40px;
-  border-radius: 2px;
-  font-weight: 200;
 `;
 
 export const Paragraph = styled.p`

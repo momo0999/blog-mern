@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostDetail } from '../../actions/postActions';
-import { CategoryLink } from '../Post.styled';
 import {
   ImageContainer,
   Img,
   PostDetail,
   Title,
   Text,
-} from './PostScreen.styled';
+  CategoryLink,
+} from '../../utils/utilsStyles.styled';
 
 const PostScreen = ({ match }) => {
   const dispatch = useDispatch();

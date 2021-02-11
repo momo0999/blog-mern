@@ -6,6 +6,7 @@ import { theme } from './theme';
 import Navbar from './components/navbar/Navbar';
 import HomeScreen from './components/screens/HomeScreen';
 import PostScreen from './components/screens/PostScreen';
+import PostCategoryScreen from './components/screens/PostCategoryScreen';
 
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
@@ -20,6 +21,10 @@ const App = () => {
           />
           <Route exact path='/' component={HomeScreen} />
           <Route path='/post/:id' component={PostScreen} />
+          <Route
+            path='/posts/category/:category'
+            component={PostCategoryScreen}
+          />
         </div>
       </Router>
     </ThemeProvider>

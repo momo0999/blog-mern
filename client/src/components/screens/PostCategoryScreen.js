@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import Post from '../Post';
+import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostsList } from '../../actions/postActions';
+import { fetchPostsByCategory } from '../../actions/postActions';
+import Post from '../Post';
 import { Logo } from '../navbar/Navbar.styled';
 import {
   CategoryLink,
@@ -10,16 +10,16 @@ import {
   StyledHomeScreen,
 } from '../../utils/utilsStyles.styled';
 
-const HomeScreen = () => {
+const PostCategoryScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.postList);
-  const { posts, loading, error } = postList;
-
+  const postCategory = useSelector((state) => state.postCategory);
+  const { posts, loading, error } = postCategory;
+  console.log(postCategory);
   useEffect(() => {
     if (!posts) {
       return;
     }
-    dispatch(fetchPostsList());
+    dispatch(fetchPostsByCategory(match.params.category));
   }, [dispatch]);
   const allCategories = ['All', ...new Set(posts.map((post) => post.category))];
   return (
@@ -50,4 +50,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default PostCategoryScreen;

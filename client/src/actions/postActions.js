@@ -6,6 +6,9 @@ import {
   POST_DETAIL_REQUEST,
   POST_DETAIL_SUCCESS,
   POST_DETAIL_FAIL,
+  POST_CATEGORY_REQUEST,
+  POST_CATEGORY_SUCCESS,
+  POST_CATEGORY_FAIL,
 } from './types';
 
 export const fetchPostsList = () => async (dispatch) => {
@@ -32,6 +35,23 @@ export const fetchPostDetail = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POST_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const fetchPostsByCategory = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: POST_CATEGORY_REQUEST });
+    const { data } = await axios.get(`/api/posts/category/${category}`);
+    console.log(data);
+    dispatch({ type: POST_CATEGORY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: POST_CATEGORY_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

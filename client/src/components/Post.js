@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { CategoryLink } from '../utils/utilsStyles.styled';
 import {
   StyledPost,
   Img,
   Paragraph,
   Title,
   PostContent,
-  CategoryLink,
   ImageContainer,
 } from './Post.styled.js';
 

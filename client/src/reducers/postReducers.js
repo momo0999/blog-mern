@@ -5,6 +5,9 @@ import {
   POST_DETAIL_REQUEST,
   POST_DETAIL_SUCCESS,
   POST_DETAIL_FAIL,
+  POST_CATEGORY_REQUEST,
+  POST_CATEGORY_SUCCESS,
+  POST_CATEGORY_FAIL,
 } from '../actions/types';
 
 export const postListReducer = (state = { posts: [] }, action) => {
@@ -27,6 +30,19 @@ export const postDetailReducer = (state = { post: {} }, action) => {
     case POST_DETAIL_SUCCESS:
       return { ...state, loading: false, post: action.payload };
     case POST_DETAIL_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const postCategoryReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case POST_CATEGORY_REQUEST:
+      return { ...state, loading: true };
+    case POST_CATEGORY_SUCCESS:
+      return { ...state, loading: false, posts: action.payload };
+    case POST_CATEGORY_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
