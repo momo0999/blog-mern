@@ -21,7 +21,9 @@ const Post = ({ post: { title, img, category, _id } }) => {
         </ImageContainer>
         <Title>{title}</Title>
         <Paragraph></Paragraph>
-        <CategoryLink to='/api/posts/category'>{category}</CategoryLink>
+        <CategoryLink to={`/posts/category/${category}`}>
+          {category}
+        </CategoryLink>
       </PostContent>
     </StyledPost>
   );
