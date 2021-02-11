@@ -2,9 +2,9 @@ import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsByCategory } from '../../actions/postActions';
 import Post from '../Post';
+import CategoriesLinks from '../CategoriesLinks';
 import { Logo } from '../navbar/Navbar.styled';
 import {
-  CategoryLink,
   RowWrapper,
   Container,
   StyledHomeScreen,
@@ -14,28 +14,17 @@ const PostCategoryScreen = ({ match }) => {
   const dispatch = useDispatch();
   const postCategory = useSelector((state) => state.postCategory);
   const { posts, loading, error } = postCategory;
-  console.log(postCategory);
   useEffect(() => {
     if (!posts) {
       return;
     }
     dispatch(fetchPostsByCategory(match.params.category));
-  }, [dispatch]);
-  const allCategories = ['All', ...new Set(posts.map((post) => post.category))];
+  }, [dispatch, match]);
   return (
     <Fragment>
       <Logo>Blog</Logo>
       <RowWrapper>
-        {allCategories.map((category, index) => {
-          return (
-            <CategoryLink
-              key={index}
-              to={category === 'All' ? '/' : `/posts/category/${category}`}
-            >
-              {category}
-            </CategoryLink>
-          );
-        })}
+        <CategoriesLinks posts={posts} />
       </RowWrapper>
       <StyledHomeScreen>
         <Container>

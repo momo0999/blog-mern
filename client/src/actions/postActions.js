@@ -47,7 +47,6 @@ export const fetchPostsByCategory = (category) => async (dispatch) => {
   try {
     dispatch({ type: POST_CATEGORY_REQUEST });
     const { data } = await axios.get(`/api/posts/category/${category}`);
-    console.log(data);
     dispatch({ type: POST_CATEGORY_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

@@ -1,42 +1,25 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import Post from '../Post';
+import CategoriesLinks from '../CategoriesLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsList } from '../../actions/postActions';
 import { Logo } from '../navbar/Navbar.styled';
-import {
-  CategoryLink,
-  RowWrapper,
-  Container,
-  StyledHomeScreen,
-} from '../../utils/utilsStyles.styled';
+import { Container, StyledHomeScreen } from '../../utils/utilsStyles.styled';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.postList);
   const { posts, loading, error } = postList;
-
   useEffect(() => {
     if (!posts) {
       return;
     }
     dispatch(fetchPostsList());
   }, [dispatch]);
-  const allCategories = ['All', ...new Set(posts.map((post) => post.category))];
   return (
     <Fragment>
       <Logo>Blog</Logo>
-      <RowWrapper>
-        {allCategories.map((category, index) => {
-          return (
-            <CategoryLink
-              key={index}
-              to={category === 'All' ? '/' : `/posts/category/${category}`}
-            >
-              {category}
-            </CategoryLink>
-          );
-        })}
-      </RowWrapper>
+      <CategoriesLinks posts={posts} />
       <StyledHomeScreen>
         <Container>
           {loading && <h1>loading...</h1>}
