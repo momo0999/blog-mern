@@ -1,7 +1,7 @@
 import React from 'react';
 import { CategoryLink, RowWrapper } from '../utils/utilsStyles.styled';
 
-const CategoriesLinks = ({ posts }) => {
+const CategoriesPostLinks = ({ posts }) => {
   const allCategories = ['all', ...new Set(posts.map((post) => post.category))];
 
   return (
@@ -20,4 +20,4 @@ const CategoriesLinks = ({ posts }) => {
   );
 };
 
-export default CategoriesLinks;
+export default CategoriesPostLinks;

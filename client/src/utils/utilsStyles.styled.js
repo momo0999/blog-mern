@@ -14,6 +14,20 @@ export const CategoryLink = styled(Link)`
 export const RowWrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+`;
+
+export const SpaceBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 150px;
+  @media (max-width: ${({ theme }) => theme.mobileSecondeShowCase}) {
+    margin: 50px 75px;
+  }
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    margin: 50px 10px;
+  }
 `;
 
 export const PostDetail = styled.div`
@@ -77,4 +91,49 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const ImagePhotography = styled.img`
+  cursor: pointer;
+  object-fit: cover;
+  width: 400px;
+  height: 400px;
+  margin: 20px;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    margin: 10px;
+    width: 100%;
+  }
+`;
+
+export const ImagesList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModelDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+`;
+
+export const ModelImage = styled.img`
+  display: block;
+  max-width: 100%;
+  max-height: 80%;
+  margin: 70px auto;
+  box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+  border: 3px solid white;
+  opacity: 1;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    max-width: 90%;
+  }
 `;

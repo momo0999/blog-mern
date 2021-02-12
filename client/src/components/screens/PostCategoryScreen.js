@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsByCategory } from '../../actions/postActions';
 import Post from '../Post';
-import CategoriesLinks from '../CategoriesLinks';
+import CategoriesPostLinks from '../CategoriesPostLinks';
 import { Logo } from '../navbar/Navbar.styled';
 import {
   RowWrapper,
@@ -24,7 +24,7 @@ const PostCategoryScreen = ({ match }) => {
     <Fragment>
       <Logo>Blog</Logo>
       <RowWrapper>
-        <CategoriesLinks posts={posts} />
+        <CategoriesPostLinks posts={posts} />
       </RowWrapper>
       <StyledHomeScreen>
         <Container>

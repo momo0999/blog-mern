@@ -1,10 +1,14 @@
 import React, { useEffect, Fragment } from 'react';
 import Post from '../Post';
-import CategoriesLinks from '../CategoriesLinks';
+import CategoriesPostLinks from '../CategoriesPostLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsList } from '../../actions/postActions';
 import { Logo } from '../navbar/Navbar.styled';
-import { Container, StyledHomeScreen } from '../../utils/utilsStyles.styled';
+import {
+  Container,
+  StyledHomeScreen,
+  SpaceBetween,
+} from '../../utils/utilsStyles.styled';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -18,8 +22,10 @@ const HomeScreen = () => {
   }, [dispatch]);
   return (
     <Fragment>
-      <Logo>Blog</Logo>
-      <CategoriesLinks posts={posts} />
+      <SpaceBetween>
+        <Logo>Blog</Logo>
+      </SpaceBetween>
+      <CategoriesPostLinks posts={posts} />
       <StyledHomeScreen>
         <Container>
           {loading && <h1>loading...</h1>}
