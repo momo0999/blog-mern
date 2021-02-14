@@ -60,6 +60,11 @@ export const Logo = styled.h1`
   letter-spacing: 3px;
 `;
 
+export const LogoLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.primaryFontColor};
+`;
+
 export const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 20px;

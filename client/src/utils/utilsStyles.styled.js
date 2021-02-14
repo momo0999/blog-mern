@@ -16,8 +16,8 @@ export const PrimaryLink = styled(Link)`
   padding: 8px 30px;
   margin: 0 0 50px 50px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.primaryDark};
-  color: #fff;
+  background-color: ${({ theme }) => theme.lightGrey};
+  color: ${({ theme }) => theme.primaryDark};
   &:hover {
     opacity: 0.8;
   }
@@ -35,13 +35,13 @@ export const PostDetail = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  text-align: center;
+  max-width: 1400px;
   height: 100%;
-  margin: 50px 150px;
+  margin: 0 auto;
   @media (max-width: ${({ theme }) => theme.mobileSecondeShowCase}) {
-    margin: 50px 75px;
   }
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    margin: 50px 25px;
   }
 `;
 
@@ -51,7 +51,24 @@ export const ImageContainer = styled.div`
   align-items: center;
   align-content: center;
   overflow: hidden;
-  max-width: 100%;
+  max-width: 70%;
+  margin: 20px;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    max-width: 100%;
+    margin: 20px;
+  }
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    max-width: 100%;
+    margin: 20px;
+  }
 `;
 
 export const Img = styled.img`

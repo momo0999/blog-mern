@@ -7,6 +7,7 @@ import {
   StyledShoppingCartIcon,
   StyledAccountCircleIcon,
   Logo,
+  LogoLink,
   StyledSearchIcon,
   BurgerButton,
   RowContainer,
@@ -34,7 +35,9 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   }, [setOpenHamburgerMenu]);
   return (
     <StyledNavbar>
-      <Logo>Logo</Logo>
+      <LogoLink to='/'>
+        <Logo>Logo</Logo>
+      </LogoLink>
       <BurgerButton ref={ref}>
         <Hamburger
           toggled={openHamburgerMenu}

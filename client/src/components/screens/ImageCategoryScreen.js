@@ -5,12 +5,9 @@ import Image from '../Image';
 import ImageModel from '../ImageModel';
 import CategoriesImageLinks from '../CategoriesImageLinks';
 import {
-  RowWrapper,
-  Container,
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
-  PrimaryLink,
   ImagesList,
 } from '../../utils/utilsStyles.styled';
 
