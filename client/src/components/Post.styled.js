@@ -29,7 +29,7 @@ export const PostContent = styled.div`
   display: flex:
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   max-height: 385px
   max-width: 380px
   padding: 15px 0;
@@ -48,4 +48,5 @@ export const Title = styled.h2`
   letter-spaceing: 1px;
   line-height: 1.3;
   margin: 10px 0;
+  text-align: left;
 `;

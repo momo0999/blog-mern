@@ -25,6 +25,7 @@ const PostScreen = ({ match }) => {
     <PostDetail>
       {loading && <h1>Loading...</h1>}
       {error && <h1>{error}</h1>}
+
       <ImageContainer>
         <Img src={img} alt='' />
       </ImageContainer>

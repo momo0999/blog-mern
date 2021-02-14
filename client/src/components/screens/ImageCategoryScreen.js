@@ -1,24 +1,27 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getImages } from '../../actions/imageActions';
-import {
-  ImagesList,
-  StyledHomeScreen,
-  PageTitle,
-  PageTitleWrapper,
-} from '../../utils/utilsStyles.styled';
+import { getImagesByCategory } from '../../actions/imageActions';
 import Image from '../Image';
 import ImageModel from '../ImageModel';
 import CategoriesImageLinks from '../CategoriesImageLinks';
+import {
+  RowWrapper,
+  Container,
+  StyledHomeScreen,
+  PageTitleWrapper,
+  PageTitle,
+  PrimaryLink,
+  ImagesList,
+} from '../../utils/utilsStyles.styled';
 
-const PhotographyScreen = () => {
+const PostCategoryScreen = ({ match }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
-  const imageList = useSelector((state) => state.imageList);
-  const { images, loading, error } = imageList;
+  const imageCategory = useSelector((state) => state.imageCategory);
+  const { images, loading, error } = imageCategory;
   useEffect(() => {
-    dispatch(getImages());
-  }, [dispatch]);
+    dispatch(getImagesByCategory(match.params.category));
+  }, [dispatch, match]);
   if (!images) {
     return;
   }
@@ -54,4 +57,4 @@ const PhotographyScreen = () => {
   );
 };
 
-export default PhotographyScreen;
+export default PostCategoryScreen;

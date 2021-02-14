@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsByCategory } from '../../actions/postActions';
 import Post from '../Post';
 import CategoriesPostLinks from '../CategoriesPostLinks';
-import { Logo } from '../navbar/Navbar.styled';
 import {
   RowWrapper,
   Container,
   StyledHomeScreen,
+  PageTitleWrapper,
+  PageTitle,
 } from '../../utils/utilsStyles.styled';
 
 const PostCategoryScreen = ({ match }) => {
@@ -15,14 +16,16 @@ const PostCategoryScreen = ({ match }) => {
   const postCategory = useSelector((state) => state.postCategory);
   const { posts, loading, error } = postCategory;
   useEffect(() => {
-    if (!posts) {
-      return;
-    }
     dispatch(fetchPostsByCategory(match.params.category));
   }, [dispatch, match]);
+  if (!posts) {
+    return;
+  }
   return (
     <Fragment>
-      <Logo>Blog</Logo>
+      <PageTitleWrapper>
+        <PageTitle>Blog</PageTitle>
+      </PageTitleWrapper>
       <RowWrapper>
         <CategoriesPostLinks posts={posts} />
       </RowWrapper>
