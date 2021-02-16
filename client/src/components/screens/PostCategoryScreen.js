@@ -13,8 +13,7 @@ import {
 
 const PostCategoryScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const postCategory = useSelector((state) => state.postCategory);
-  const { posts, loading, error } = postCategory;
+  const { posts, loading, error } = useSelector((state) => state.postCategory);
   useEffect(() => {
     dispatch(fetchPostsByCategory(match.params.category));
   }, [dispatch, match]);

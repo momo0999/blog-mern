@@ -14,12 +14,11 @@ import {
 
 const PostScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const postDetail = useSelector((state) => state.postDetail);
   const {
     post: { title, img, content, category },
     loading,
     error,
-  } = postDetail;
+  } = useSelector((state) => state.postDetail);
   useEffect(() => {
     dispatch(fetchPostDetail(match.params.id));
   }, [dispatch, match]);

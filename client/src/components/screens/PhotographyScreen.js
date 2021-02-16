@@ -14,8 +14,7 @@ import CategoriesImageLinks from '../CategoriesImageLinks';
 const PhotographyScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
-  const imageList = useSelector((state) => state.imageList);
-  const { images, loading, error } = imageList;
+  const { images, loading, error } = useSelector((state) => state.imageList);
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);

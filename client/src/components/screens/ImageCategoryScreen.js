@@ -14,8 +14,9 @@ import {
 const PostCategoryScreen = ({ match }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
-  const imageCategory = useSelector((state) => state.imageCategory);
-  const { images, loading, error } = imageCategory;
+  const { images, loading, error } = useSelector(
+    (state) => state.imageCategory
+  );
   useEffect(() => {
     dispatch(getImagesByCategory(match.params.category));
   }, [dispatch, match]);

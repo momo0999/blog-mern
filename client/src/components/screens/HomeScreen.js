@@ -3,25 +3,22 @@ import Post from '../Post';
 import CategoriesPostLinks from '../CategoriesPostLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsList } from '../../actions/postActions';
-import { CategoryLink } from '../../utils/utilsStyles.styled';
 import {
   Container,
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
-  BorderDiv,
 } from '../../utils/utilsStyles.styled';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.postList);
-  const { posts, loading, error } = postList;
+  const { posts, loading, error } = useSelector((state) => state.postList);
   useEffect(() => {
-    if (!posts) {
-      return;
-    }
     dispatch(fetchPostsList());
   }, [dispatch]);
+  if (!posts) {
+    return;
+  }
   return (
     <Fragment>
       <PageTitleWrapper>
