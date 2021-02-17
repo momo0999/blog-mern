@@ -15,6 +15,10 @@ const getPosts = asyncHandler(async (req, res) => {
   }
 });
 
+// @route  /api/posts/:id
+// @desc   Get post
+// @access Public
+
 const getPostById = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id);
   if (post) {
@@ -24,6 +28,10 @@ const getPostById = asyncHandler(async (req, res) => {
     throw new Error('Post not found');
   }
 });
+
+// @route  /api/posts/category/:category
+// @desc   Get post by category
+// @access Public
 
 const getPostsByCategory = asyncHandler(async (req, res) => {
   const posts = await Post.find({ category: req.params.category });
@@ -35,4 +43,63 @@ const getPostsByCategory = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPosts, getPostById, getPostsByCategory };
+// @route  /api/posts
+// @desc   Post request
+// @access Public
+
+const createPost = asyncHandler(async (req, res) => {
+  const { title, content, img, category } = req.body;
+  const post = new Post({
+    title,
+    content,
+    img,
+    category,
+  });
+  const createdPost = await post.save();
+  res.status(201).json(createdPost);
+});
+
+// @route  /api/posts/:id
+// @desc   put request update post
+// @access Public
+
+const updatePost = asyncHandler(async (req, res) => {
+  const { title, content, img, category } = req.body;
+  const post = await Post.findById(req.params.id);
+  if (post) {
+    post.title = title;
+    post.content = content;
+    post.img = img;
+    post.category = category;
+
+    const updatedPost = post.save();
+    res.json(updatedPost);
+  } else {
+    res.status(404);
+    throw new Error('Post not found');
+  }
+});
+
+// @route  /api/posts/:id
+// @desc   delete request delete post
+// @access Public
+
+const deletePost = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (post) {
+    await post.remove();
+    res.json({ message: 'Post removed' });
+  } else {
+    res.status(404);
+    throw new Error('Post not found');
+  }
+});
+
+export {
+  getPosts,
+  getPostById,
+  getPostsByCategory,
+  createPost,
+  updatePost,
+  deletePost,
+};
