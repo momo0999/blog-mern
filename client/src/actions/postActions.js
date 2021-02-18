@@ -9,6 +9,9 @@ import {
   POST_CATEGORY_REQUEST,
   POST_CATEGORY_SUCCESS,
   POST_CATEGORY_FAIL,
+  POST_CREATE_REQUEST,
+  POST_CREATE_SUCCESS,
+  POST_CREATE_FAIL,
 } from './types';
 
 export const fetchPostsList = () => async (dispatch) => {
@@ -51,6 +54,22 @@ export const fetchPostsByCategory = (category) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POST_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createPost = (formValues) => async (dispatch) => {
+  try {
+    dispatch({ type: POST_CREATE_REQUEST });
+    const { data } = await axios.post('/api/posts', formValues);
+    dispatch({ type: POST_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: POST_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

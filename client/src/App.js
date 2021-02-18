@@ -9,6 +9,7 @@ import PostScreen from './components/screens/PostScreen';
 import PostCategoryScreen from './components/screens/PostCategoryScreen';
 import PhotographyScreen from './components/screens/PhotographyScreen';
 import ImageCategoryScreen from './components/screens/ImageCategoryScreen';
+import CreatePostScreen from './components/screens/CreatePostScreen';
 
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
@@ -22,6 +23,7 @@ const App = () => {
             setOpenHamburgerMenu={setOpenHamburgerMenu}
           />
           <Route exact path='/' component={HomeScreen} />
+          <Route path='/posts/create' component={CreatePostScreen} />
           <Route exact path='/photography' component={PhotographyScreen} />
           <Route
             path='/photography/category/:category'

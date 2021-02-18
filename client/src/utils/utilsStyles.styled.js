@@ -173,3 +173,82 @@ export const BorderDiv = styled.div`
   width: 30px;
   background: #f4f4f4;
 `;
+
+// Form
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+`;
+export const WrapperLabelInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+`;
+
+export const Label = styled.label`
+  letter-spacing: 1.2px;
+  color: ${({ theme }) => theme.labelFontColor};
+  margin-bottom: 10px;
+  &:after {
+    content: '*';
+  }
+`;
+
+export const Input = styled.input`
+  background-color: #fff;
+  border-radius: 4px;
+  color: #363636;
+  font-size: 15px;
+  letter-spacing: 1px;
+  box-shadow: none;
+  max-width: 100%;
+  width: 100%;
+  border: 1px solid #e7e7e7;
+  width: 100%;
+  height: 35px;
+  padding: 25px 10px;
+  &::placeholder {
+    color: ${({ theme }) => theme.labelFontColor};
+    font-size: 15px;
+    font-weight: 200;
+    opacity: 0.8;
+  }
+`;
+
+export const Textarea = styled.textarea`
+  background-color: #fff;
+  color: #363636;
+  border-radius: 4px;
+  box-shadow: none;
+  max-width: 100%;
+  width: 100%;
+  height: 100px;
+  padding: 10px 10px;
+  border: 1px solid #e7e7e7;
+  &::placeholder {
+    color: ${({ theme }) => theme.labelFontColor};
+    font-size: 15px;
+    font-weight: 200;
+    opacity: 0.8;
+  }
+`;
+
+export const Button = styled.button`
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.primaryLight};
+  background-color: ${({ theme }) => theme.primaryDark};
+  padding: 8px 30px;
+  transition: opacity 0.2s ease-in;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
