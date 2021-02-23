@@ -11,12 +11,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleAlerts() {
+export default function SimpleAlerts({ message }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Alert severity='success'>Post Created!</Alert>
+      <Alert severity='success'>{message}</Alert>
     </div>
   );
 }

@@ -43,6 +43,7 @@ export const List = styled.ul`
     transform: ${({ openHamburgerMenu }) =>
       !openHamburgerMenu ? 'translateX(-100%)' : 'translateX(0)'};
     transition: transform 0.4s ease-in, width 0.2s ease-in;
+    z-index: 10;
   }
 `;
 export const ListIcons = styled.ul`
@@ -118,7 +119,7 @@ export const BurgerButton = styled.button`
     justify-content: center;
     align-items: center;
     right: 0;
-    z-index: 1;
+    z-index: 11;
     margin: 0;
     padding: 10px;
     border: none;

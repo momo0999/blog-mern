@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost } from '../../actions/postActions';
+import { editPost, fetchPostDetail } from '../../actions/postActions';
 import {
   Form,
   WrapperLabelInput,
@@ -12,15 +12,17 @@ import {
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
-const CreatePostScreen = () => {
+const EditPostScreen = ({ match }) => {
   const dispatch = useDispatch();
-  const { success } = useSelector((state) => state.postCreate);
+  const { success } = useSelector((state) => state.postEdit);
+  const { post } = useSelector((state) => state.postDetail);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [formValues, setFormValues] = useState({
-    title: '',
-    category: '',
-    img: '',
-    content: '',
+    _id: post._id,
+    title: post.title,
+    category: post.category,
+    img: post.img,
+    content: post.content,
   });
   const { title, content, category, img } = formValues;
   const handleOnChange = (e) => {
@@ -29,6 +31,7 @@ const CreatePostScreen = () => {
   };
 
   useEffect(() => {
+    dispatch(fetchPostDetail(match.params.id));
     if (success) {
       const setTimeoutId = setTimeout(() => {
         setShowSuccessTab(true);
@@ -39,22 +42,19 @@ const CreatePostScreen = () => {
         clearTimeout(setTimeoutId);
       }, 3000);
     }
-  }, [success]);
+  }, [dispatch, match, success]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(formValues));
-    setFormValues({
-      title: '',
-      category: '',
-      img: '',
-      content: '',
-    });
+    dispatch(editPost(formValues));
   };
+  if (!post) {
+    return;
+  }
   return (
     <StyledHomeScreen>
       <Form onSubmit={handleOnSubmit}>
-        {showSuccessTab && <SuccessAlert message='Post Created!' />}
+        {showSuccessTab && <SuccessAlert message='Post Updated!' />}
         <WrapperLabelInput>
           <Label>Title</Label>
           <Input
@@ -99,4 +99,4 @@ const CreatePostScreen = () => {
   );
 };
 
-export default CreatePostScreen;
+export default EditPostScreen;

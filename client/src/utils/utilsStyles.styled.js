@@ -30,6 +30,13 @@ export const RowWrapper = styled.div`
   margin: 20px;
 `;
 
+export const ColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
 export const PostDetail = styled.div`
   display: flex;
   flex-direction: column;
@@ -152,7 +159,7 @@ export const ModelImage = styled.img`
 
 export const PageTitleWrapper = styled.div`
   display: flex;
-  flex-direction: columns;
+  flex-direction: column;
   align-items: center;
   justify-content center;
   text-align: center;
@@ -181,7 +188,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 50%;
+  width: 80%;
 `;
 export const WrapperLabelInput = styled.div`
   display: flex;
@@ -251,4 +258,30 @@ export const Button = styled.button`
   &:hover {
     opacity: 0.8;
   }
+`;
+
+// Modal Container
+
+export const ModalWindow = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+`;
+
+export const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 5px;
 `;

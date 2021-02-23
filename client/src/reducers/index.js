@@ -4,6 +4,8 @@ import {
   postDetailReducer,
   postCategoryReducer,
   postCreateReducer,
+  postDeleteReducer,
+  postEditReducer,
 } from './postReducers';
 import { imageListReducer, imageCategoryReducer } from './imageReducers';
 
@@ -14,4 +16,6 @@ export default combineReducers({
   imageList: imageListReducer,
   imageCategory: imageCategoryReducer,
   postCreate: postCreateReducer,
+  postDelete: postDeleteReducer,
+  postEdit: postEditReducer,
 });

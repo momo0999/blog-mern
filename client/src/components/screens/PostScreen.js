@@ -12,7 +12,7 @@ import {
   PrimaryLink,
 } from '../../utils/utilsStyles.styled';
 
-const PostScreen = ({ match }) => {
+const PostScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const {
     post: { title, img, content, category },
@@ -25,6 +25,10 @@ const PostScreen = ({ match }) => {
   return (
     <Fragment>
       <PrimaryLink to='/'>Back to all articles</PrimaryLink>
+      <PrimaryLink to={`/posts/delete/${match.params.id}`}>
+        Delete Blog
+      </PrimaryLink>
+      <PrimaryLink to={`/posts/edit/${match.params.id}`}>Edit Blog</PrimaryLink>
       <PostDetail>
         {loading && <h1>Loading...</h1>}
         {error && <h1>{error}</h1>}

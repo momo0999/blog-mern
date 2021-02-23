@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   POST_LIST_SUCCESS,
   POST_LIST_REQUEST,
@@ -12,6 +13,14 @@ import {
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
   POST_CREATE_FAIL,
+  POST_CREATE_RESET,
+  POST_DELETE_REQUEST,
+  POST_DELETE_SUCCESS,
+  POST_DELETE_FAIL,
+  POST_EDIT_REQUEST,
+  POST_EDIT_SUCCESS,
+  POST_EDIT_FAIL,
+  POST_EDIT_RESET,
 } from './types';
 
 export const fetchPostsList = () => async (dispatch) => {
@@ -67,9 +76,46 @@ export const createPost = (formValues) => async (dispatch) => {
     dispatch({ type: POST_CREATE_REQUEST });
     const { data } = await axios.post('/api/posts', formValues);
     dispatch({ type: POST_CREATE_SUCCESS, payload: data });
+    dispatch({ type: POST_CREATE_RESET });
   } catch (error) {
     dispatch({
       type: POST_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const editPost = (formValues) => async (dispatch) => {
+  try {
+    dispatch({ type: POST_EDIT_REQUEST });
+    const { data } = await axios.put(
+      `/api/posts/${formValues._id}`,
+      formValues
+    );
+    dispatch({ type: POST_EDIT_SUCCESS, payload: data });
+    dispatch({ type: POST_CREATE_RESET });
+  } catch (error) {
+    dispatch({
+      type: POST_EDIT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: POST_DELETE_REQUEST });
+    await axios.delete(`/api/posts/${id}`);
+    dispatch({ type: POST_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: POST_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
