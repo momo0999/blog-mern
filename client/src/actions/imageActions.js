@@ -6,6 +6,13 @@ import {
   IMAGE_CATEGORY_REQUEST,
   IMAGE_CATEGORY_SUCCESS,
   IMAGE_CATEGORY_FAIL,
+  IMAGE_CREATE_REQUEST,
+  IMAGE_CREATE_SUCCESS,
+  IMAGE_CREATE_FAIL,
+  IMAGE_CREATE_RESET,
+  IMAGE_DELETE_REQUEST,
+  IMAGE_DELETE_SUCCESS,
+  IMAGE_DELETE_FAIL,
 } from './types';
 
 export const getImages = () => async (dispatch) => {
@@ -32,6 +39,39 @@ export const getImagesByCategory = (category) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: IMAGE_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createImage = (formValues) => async (dispatch) => {
+  try {
+    dispatch({ type: IMAGE_CREATE_REQUEST });
+    const { data } = await axios.post(`/api/images`, formValues);
+    dispatch({ type: IMAGE_CREATE_SUCCESS, payload: data });
+    dispatch({ type: IMAGE_CREATE_RESET });
+  } catch (error) {
+    dispatch({
+      type: IMAGE_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteImage = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: IMAGE_DELETE_REQUEST });
+    await axios.delete(`/api/images/${id}`);
+    dispatch({ type: IMAGE_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: IMAGE_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

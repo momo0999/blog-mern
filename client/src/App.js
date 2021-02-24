@@ -12,6 +12,8 @@ import ImageCategoryScreen from './components/screens/ImageCategoryScreen';
 import CreatePostScreen from './components/screens/CreatePostScreen';
 import DeletePostScreen from './components/screens/DeletePostScreen';
 import EditPostScreen from './components/screens/EditPostScreen';
+import CreateImageScreen from './components/screens/CreateImageScreen';
+import DeleteImageScreen from './components/screens/DeleteImageScreen';
 
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
@@ -28,6 +30,12 @@ const App = () => {
           <Route path='/posts/create' component={CreatePostScreen} />
           <Route path='/posts/edit/:id' component={EditPostScreen} />
           <Route exact path='/photography' component={PhotographyScreen} />
+          <Route path='/images/create' component={CreateImageScreen} />
+          <Route
+            exact
+            path='/images/delete/:id'
+            component={DeleteImageScreen}
+          />
           <Route
             path='/photography/category/:category'
             component={ImageCategoryScreen}

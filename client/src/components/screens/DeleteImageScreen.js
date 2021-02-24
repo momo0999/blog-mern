@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost } from '../../actions/postActions';
+import { deleteImage } from '../../actions/imageActions';
 import { Link } from 'react-router-dom';
 import { Button } from '../../utils/utilsStyles.styled';
 import Modal from '../Modal';
 
-const DeletePostScreen = ({ match, history }) => {
+const DeleteImageScreen = ({ match, history }) => {
   const dispatch = useDispatch();
-  const { success } = useSelector((state) => state.postDelete);
+  const { success } = useSelector((state) => state.imageDelete);
   const handleOnDelete = (id) => {
-    dispatch(deletePost(id));
+    dispatch(deleteImage(id));
   };
-
   useEffect(() => {
     if (success) {
-      history.push('/');
+      history.push('/photography');
     }
   });
 
@@ -26,11 +25,11 @@ const DeletePostScreen = ({ match, history }) => {
   );
   return (
     <Modal
-      title='Delete Blog'
-      content='Are you sure you want to delete this blog?'
+      title='Delete Image'
+      content='Are you sure you want to delete this image?'
       actions={renderActions}
     />
   );
 };
 
-export default DeletePostScreen;
+export default DeleteImageScreen;
