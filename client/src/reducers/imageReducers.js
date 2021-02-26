@@ -12,6 +12,7 @@ import {
   IMAGE_DELETE_REQUEST,
   IMAGE_DELETE_SUCCESS,
   IMAGE_DELETE_FAIL,
+  IMAGE_DELETE_RESET,
 } from '../actions/types';
 
 export const imageListReducer = (state = { images: [] }, action) => {
@@ -63,6 +64,8 @@ export const imageDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case IMAGE_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    case IMAGE_DELETE_RESET:
+      return {};
     default:
       return state;
   }

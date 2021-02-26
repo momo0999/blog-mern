@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
+
 import Navbar from './components/navbar/Navbar';
 import HomeScreen from './components/screens/HomeScreen';
 import PostScreen from './components/screens/PostScreen';
@@ -10,7 +11,6 @@ import PostCategoryScreen from './components/screens/PostCategoryScreen';
 import PhotographyScreen from './components/screens/PhotographyScreen';
 import ImageCategoryScreen from './components/screens/ImageCategoryScreen';
 import CreatePostScreen from './components/screens/CreatePostScreen';
-import DeletePostScreen from './components/screens/DeletePostScreen';
 import EditPostScreen from './components/screens/EditPostScreen';
 import CreateImageScreen from './components/screens/CreateImageScreen';
 import DeleteImageScreen from './components/screens/DeleteImageScreen';
@@ -37,7 +37,7 @@ const App = () => {
             component={ImageCategoryScreen}
           />
           <Route path='/post/:id' component={PostScreen} />
-          <Route path='/posts/delete/:id' component={DeletePostScreen} />
+
           <Route
             path='/posts/category/:category'
             component={PostCategoryScreen}

@@ -15,6 +15,7 @@ import {
   POST_DELETE_REQUEST,
   POST_DELETE_SUCCESS,
   POST_DELETE_FAIL,
+  POST_DELETE_RESET,
   POST_EDIT_REQUEST,
   POST_EDIT_SUCCESS,
   POST_EDIT_FAIL,
@@ -98,6 +99,8 @@ export const postDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case POST_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    case POST_DELETE_RESET:
+      return {};
     default:
       return state;
   }

@@ -1,26 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteImage } from '../../actions/imageActions';
+import { IMAGE_DELETE_RESET } from '../../actions/types';
 import { Link } from 'react-router-dom';
-import { Button } from '../../utils/utilsStyles.styled';
+import {
+  Button,
+  PrimaryLink,
+  DangerButton,
+} from '../../utils/utilsStyles.styled';
 import Modal from '../Modal';
 
 const DeleteImageScreen = ({ match, history }) => {
   const dispatch = useDispatch();
+  const timer = useRef();
   const { success } = useSelector((state) => state.imageDelete);
   const handleOnDelete = (id) => {
     dispatch(deleteImage(id));
   };
   useEffect(() => {
     if (success) {
-      history.push('/photography');
+      timer.current = setTimeout(() => {
+        history.push('/photography');
+        dispatch({ type: IMAGE_DELETE_RESET });
+      }, 0);
     }
+    return () => {
+      clearTimeout(timer.current);
+    };
   });
-
   const renderActions = (
     <React.Fragment>
-      <Button onClick={() => handleOnDelete(match.params.id)}>Delete</Button>
-      <Link to={`/post/${match.params.id}`}>Cancel</Link>
+      <DangerButton onClick={() => handleOnDelete(match.params.id)}>
+        Delete
+      </DangerButton>
+      <PrimaryLink to='/photography'>Cancel</PrimaryLink>
     </React.Fragment>
   );
   return (

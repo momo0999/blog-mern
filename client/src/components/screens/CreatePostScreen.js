@@ -14,6 +14,7 @@ import SuccessAlert from '../SuccessAlert';
 
 const CreatePostScreen = () => {
   const dispatch = useDispatch();
+  const timer = useRef();
   const { success } = useSelector((state) => state.postCreate);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -22,7 +23,7 @@ const CreatePostScreen = () => {
     img: '',
     content: '',
   });
-  const timer = useRef();
+
   const { title, content, category, img } = formValues;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +38,9 @@ const CreatePostScreen = () => {
       }, 3000);
     }
     return () => {
-      clearTimeout(timer.current);
+      if (!success) {
+        clearTimeout(timer.current);
+      }
     };
   }, [success]);
 

@@ -14,13 +14,33 @@ export const CategoryLink = styled(Link)`
 export const PrimaryLink = styled(Link)`
   text-decoration: none;
   padding: 8px 30px;
-  margin: 0 0 50px 50px;
   border-radius: 2px;
+  font-size: 15px;
+  margin: 10px;
   background-color: ${({ theme }) => theme.lightGrey};
   color: ${({ theme }) => theme.primaryDark};
   &:hover {
     opacity: 0.8;
   }
+`;
+
+export const PrimaryButton = styled.button`
+  cursor: pointer;
+  border: none;
+  padding: 8px 30px;
+  border-radius: 2px;
+  font-size: 15px;
+  margin: 10px;
+  background-color: ${({ theme }) => theme.lightGrey};
+  color: ${({ theme }) => theme.primaryDark};
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const DangerButton = styled(PrimaryButton)`
+  background-color: ${({ theme }) => theme.primaryDanger};
+  color: ${({ theme }) => theme.primaryLight};
 `;
 
 export const RowWrapper = styled.div`
@@ -264,24 +284,39 @@ export const Button = styled.button`
 
 export const ModalWindow = styled.div`
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.8;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
 `;
 
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: black;
+  padding: 20px;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #fff;
+`;
+
+export const ModalButtonWrapper = styled.div`
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 5px;
+`;
+
+export const ModalTitle = styled.h1`
+  slef-align: flex-start;
 `;

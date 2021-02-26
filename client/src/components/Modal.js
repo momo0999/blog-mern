@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ModalWindow, ModalContainer } from '../utils/utilsStyles.styled';
+import {
+  ModalWindow,
+  ModalContainer,
+  ModalButtonWrapper,
+  Text,
+  ModalTitle,
+} from '../utils/utilsStyles.styled';
 const Modal = ({ title, content, actions }) => {
   return ReactDOM.createPortal(
     <ModalWindow>
       <ModalContainer>
-        <h1>{title}</h1>
-        <p>{content}</p>
-        {actions}
+        <ModalTitle>{title}</ModalTitle>
+        <Text>{content}</Text>
+        <ModalButtonWrapper>{actions}</ModalButtonWrapper>
       </ModalContainer>
     </ModalWindow>,
     document.querySelector('#modal')

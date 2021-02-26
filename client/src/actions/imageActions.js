@@ -13,6 +13,7 @@ import {
   IMAGE_DELETE_REQUEST,
   IMAGE_DELETE_SUCCESS,
   IMAGE_DELETE_FAIL,
+  IMAGE_DELETE_RESET,
 } from './types';
 
 export const getImages = () => async (dispatch) => {

@@ -29,7 +29,9 @@ const CreateImageScreen = () => {
       }, 3000);
     }
     return () => {
-      clearTimeout(timer.current);
+      if (!success) {
+        clearTimeout(timer.current);
+      }
     };
   }, [success]);
   const handleOnChange = (e) => {
