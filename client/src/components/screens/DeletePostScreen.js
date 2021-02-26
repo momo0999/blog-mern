@@ -12,12 +12,6 @@ const DeletePostScreen = ({ match, history }) => {
     dispatch(deletePost(id));
   };
 
-  useEffect(() => {
-    if (success) {
-      history.push('/');
-    }
-  });
-
   const renderActions = (
     <React.Fragment>
       <Button onClick={() => handleOnDelete(match.params.id)}>Delete</Button>

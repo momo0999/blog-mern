@@ -31,17 +31,13 @@ const App = () => {
           <Route path='/posts/edit/:id' component={EditPostScreen} />
           <Route exact path='/photography' component={PhotographyScreen} />
           <Route path='/images/create' component={CreateImageScreen} />
-          <Route
-            exact
-            path='/images/delete/:id'
-            component={DeleteImageScreen}
-          />
+          <Route path='/images/delete/:id' component={DeleteImageScreen} />
           <Route
             path='/photography/category/:category'
             component={ImageCategoryScreen}
           />
-          <Route exact path='/post/:id' component={PostScreen} />
-          <Route exact path='/posts/delete/:id' component={DeletePostScreen} />
+          <Route path='/post/:id' component={PostScreen} />
+          <Route path='/posts/delete/:id' component={DeletePostScreen} />
           <Route
             path='/posts/category/:category'
             component={PostCategoryScreen}

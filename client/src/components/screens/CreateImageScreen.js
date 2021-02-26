@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createImage } from '../../actions/imageActions';
 import {
@@ -20,17 +20,17 @@ const CreateImageScreen = () => {
     category: '',
   });
   const { img, category } = formValues;
+  const timer = useRef();
   useEffect(() => {
     if (success) {
-      const setTimeoutId = setTimeout(() => {
-        setShowSuccessTab(true);
-      }, 0);
-
-      setTimeout(() => {
+      setShowSuccessTab(true);
+      timer.current = setTimeout(() => {
         setShowSuccessTab(false);
-        clearTimeout(setTimeoutId);
       }, 3000);
     }
+    return () => {
+      clearTimeout(timer.current);
+    };
   }, [success]);
   const handleOnChange = (e) => {
     const { name, value } = e.target;

@@ -11,6 +11,7 @@ import {
   TextContainer,
   PrimaryLink,
 } from '../../utils/utilsStyles.styled';
+import Modal from '../Modal';
 
 const PostScreen = ({ match, history }) => {
   const dispatch = useDispatch();

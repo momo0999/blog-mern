@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../actions/postActions';
 import {
@@ -22,6 +22,7 @@ const CreatePostScreen = () => {
     img: '',
     content: '',
   });
+  const timer = useRef();
   const { title, content, category, img } = formValues;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -30,15 +31,14 @@ const CreatePostScreen = () => {
 
   useEffect(() => {
     if (success) {
-      const setTimeoutId = setTimeout(() => {
-        setShowSuccessTab(true);
-      }, 0);
-
-      setTimeout(() => {
+      setShowSuccessTab(true);
+      timer.current = setTimeout(() => {
         setShowSuccessTab(false);
-        clearTimeout(setTimeoutId);
       }, 3000);
     }
+    return () => {
+      clearTimeout(timer.current);
+    };
   }, [success]);
 
   const handleOnSubmit = (e) => {
