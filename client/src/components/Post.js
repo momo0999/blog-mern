@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CategoryLink } from '../utils/utilsStyles.styled';
+import { CategoryLink, ColumnWrapper } from '../utils/utilsStyles.styled';
 import {
   StyledPost,
   Img,
-  Paragraph,
   Title,
   PostContent,
   ImageContainer,
@@ -19,11 +18,12 @@ const Post = ({ post: { title, img, category, _id } }) => {
             <Img src={img} alt={title} />
           </Link>
         </ImageContainer>
-        <Title>{title}</Title>
-        <Paragraph></Paragraph>
-        <CategoryLink to={`/posts/category/${category}`}>
-          {category}
-        </CategoryLink>
+        <ColumnWrapper>
+          <Title>{title}</Title>
+          <CategoryLink to={`/posts/category/${category}`}>
+            {category}
+          </CategoryLink>
+        </ColumnWrapper>
       </PostContent>
     </StyledPost>
   );

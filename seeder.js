@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import images from './data/images.js';
-import Photo from './models/photoModel.js';
+import users from './data/users.js';
+import User from './models/userModel.js';
+
 import connectDB from './config/db.js';
 
 dotenv.config();
@@ -10,30 +11,28 @@ connectDB();
 
 const importData = async () => {
   try {
-    await Photo.deleteMany();
+    await User.deleteMany();
 
-    const sampleImages = images.map((image) => {
-      return { ...image };
-    });
+    const createdUsers = await User.insertMany(users);
 
-    await Photo.insertMany(sampleImages);
+    const adminUser = createdUsers[0]._id;
 
-    console.log('Data Imported!');
+    console.log('Data Imported!'.green.inverse);
     process.exit();
   } catch (error) {
-    console.error(`${error}`);
+    console.error(`${error}`.red.inverse);
     process.exit(1);
   }
 };
 
 const destroyData = async () => {
   try {
-    await Post.deleteMany();
+    await User.deleteMany();
 
-    console.log('Data Destroyed!');
+    console.log('Data Destroyed!'.red.inverse);
     process.exit();
   } catch (error) {
-    console.error(`${error}`);
+    console.error(`${error}`.red.inverse);
     process.exit(1);
   }
 };

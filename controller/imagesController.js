@@ -39,4 +39,46 @@ const getImagesByCategory = asyncHandler(async (req, res) => {
   }
 });
 
-export { getImagesByCategory, getImages, getImageById };
+const createImage = asyncHandler(async (req, res) => {
+  const { img, category } = req.body;
+  const image = new Photo({
+    img,
+    category,
+  });
+  const createdImage = await image.save();
+  res.status(201).json(createdImage);
+});
+
+const updateImage = asyncHandler(async (req, res) => {
+  const { img, category } = req.body;
+  const image = await Photo.findById(req.params.id);
+  if (image) {
+    image.img = img;
+    image.category = category;
+    const updatedImage = await image.save();
+    res.json(updatedImage);
+  } else {
+    res.status(404);
+    throw new Error('Image not found');
+  }
+});
+
+const deleteImage = asyncHandler(async (req, res) => {
+  const image = await Photo.findById(req.params.id);
+  if (image) {
+    await image.remove();
+    res.json('Image removed');
+  } else {
+    res.status(404);
+    throw new Error('Image not found');
+  }
+});
+
+export {
+  getImagesByCategory,
+  getImages,
+  getImageById,
+  createImage,
+  deleteImage,
+  updateImage,
+};

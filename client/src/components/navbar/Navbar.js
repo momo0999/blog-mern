@@ -48,6 +48,12 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
       <RowContainer>
         <List ref={menuRef} openHamburgerMenu={openHamburgerMenu}>
           <li>
+            <StyledLink to='/images/create'>New Image</StyledLink>
+          </li>
+          <li>
+            <StyledLink to='/posts/create'>New Blog</StyledLink>
+          </li>
+          <li>
             <StyledLink ref={linkRef} to='/'>
               Blog
             </StyledLink>

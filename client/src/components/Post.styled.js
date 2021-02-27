@@ -5,24 +5,20 @@ export const StyledPost = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  max-width: 380px;
+  max-width: 330px;
   height: 400px;
   margin: 10px;
 `;
 
 export const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  overflow: hidden;
-  max-width: 380px;
-  height: 215px;
+  width: 100%;
+  max-height: auto;
 `;
 
 export const Img = styled.img`
   width: 100%;
-  border-radius: 5px;
+  max-height: 100%;
+  object-fit: contain;
 `;
 
 export const PostContent = styled.div`
@@ -30,7 +26,7 @@ export const PostContent = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  max-height: 385px
+  max-height: 300px
   max-width: 380px
   padding: 15px 0;
  

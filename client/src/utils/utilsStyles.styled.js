@@ -14,8 +14,9 @@ export const CategoryLink = styled(Link)`
 export const PrimaryLink = styled(Link)`
   text-decoration: none;
   padding: 8px 30px;
-  margin: 0 0 50px 50px;
   border-radius: 2px;
+  font-size: 15px;
+  margin: 10px;
   background-color: ${({ theme }) => theme.lightGrey};
   color: ${({ theme }) => theme.primaryDark};
   &:hover {
@@ -23,11 +24,37 @@ export const PrimaryLink = styled(Link)`
   }
 `;
 
+export const PrimaryButton = styled.button`
+  cursor: pointer;
+  border: none;
+  padding: 8px 30px;
+  border-radius: 2px;
+  font-size: 15px;
+  margin: 10px;
+  background-color: ${({ theme }) => theme.lightGrey};
+  color: ${({ theme }) => theme.primaryDark};
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const DangerButton = styled(PrimaryButton)`
+  background-color: ${({ theme }) => theme.primaryDanger};
+  color: ${({ theme }) => theme.primaryLight};
+`;
+
 export const RowWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin: 20px;
+`;
+
+export const ColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const PostDetail = styled.div`
@@ -152,7 +179,7 @@ export const ModelImage = styled.img`
 
 export const PageTitleWrapper = styled.div`
   display: flex;
-  flex-direction: columns;
+  flex-direction: column;
   align-items: center;
   justify-content center;
   text-align: center;
@@ -172,4 +199,124 @@ export const BorderDiv = styled.div`
   height: 2px;
   width: 30px;
   background: #f4f4f4;
+`;
+
+// Form
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 80%;
+`;
+export const WrapperLabelInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+`;
+
+export const Label = styled.label`
+  letter-spacing: 1.2px;
+  color: ${({ theme }) => theme.labelFontColor};
+  margin-bottom: 10px;
+  &:after {
+    content: '*';
+  }
+`;
+
+export const Input = styled.input`
+  background-color: #fff;
+  border-radius: 4px;
+  color: #363636;
+  font-size: 15px;
+  letter-spacing: 1px;
+  box-shadow: none;
+  max-width: 100%;
+  width: 100%;
+  border: 1px solid #e7e7e7;
+  width: 100%;
+  height: 35px;
+  padding: 25px 10px;
+  &::placeholder {
+    color: ${({ theme }) => theme.labelFontColor};
+    font-size: 15px;
+    font-weight: 200;
+    opacity: 0.8;
+  }
+`;
+
+export const Textarea = styled.textarea`
+  background-color: #fff;
+  color: #363636;
+  border-radius: 4px;
+  box-shadow: none;
+  max-width: 100%;
+  width: 100%;
+  height: 100px;
+  padding: 10px 10px;
+  border: 1px solid #e7e7e7;
+  &::placeholder {
+    color: ${({ theme }) => theme.labelFontColor};
+    font-size: 15px;
+    font-weight: 200;
+    opacity: 0.8;
+  }
+`;
+
+export const Button = styled.button`
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.primaryLight};
+  background-color: ${({ theme }) => theme.primaryDark};
+  padding: 8px 30px;
+  transition: opacity 0.2s ease-in;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+// Modal Container
+
+export const ModalWindow = styled.div`
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+`;
+
+export const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: black;
+  padding: 20px;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #fff;
+`;
+
+export const ModalButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalTitle = styled.h1`
+  slef-align: flex-start;
 `;
