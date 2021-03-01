@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { POST_DELETE_RESET, IMAGE_DELETE_RESET } from '../../actions/types';
 import {
   fetchPostsList,
   deletePost,
@@ -32,12 +33,22 @@ const DashboardScreen = ({ history, match }) => {
   );
   const { userInfo } = useSelector((state) => state.userLogin);
   const { posts, loading, error } = useSelector((state) => state.postList);
-  const { success: successDelete } = useSelector((state) => state.postDelete);
+  const { success: successDeletePost } = useSelector(
+    (state) => state.postDelete
+  );
+  const { success: successDeleteImage } = useSelector(
+    (state) => state.imageDelete
+  );
   const [postDelete, setPostDelete] = useState(false);
   const [postId, setPostId] = useState('');
   const [imageDelete, setImageDelete] = useState(false);
   const [imageId, setImageId] = useState('');
-  const [showSuccessDeleteTab, setShowSuccessDeleteTab] = useState(false);
+  const [showSuccessDeletePostTab, setShowSuccessDeletePostTab] = useState(
+    false
+  );
+  const [showSuccessDeleteImageTab, setShowSuccessDeleteImageTab] = useState(
+    false
+  );
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -49,30 +60,45 @@ const DashboardScreen = ({ history, match }) => {
   }, [dispatch, userInfo, history]);
 
   useEffect(() => {
-    if (successDelete) {
-      setShowSuccessDeleteTab(true);
+    if (successDeletePost) {
+      setShowSuccessDeletePostTab(true);
       timer.current = setTimeout(() => {
-        setShowSuccessDeleteTab(false);
+        setShowSuccessDeletePostTab(false);
       }, 3000);
     }
     return () => {
-      if (!successDelete) {
+      if (!successDeletePost) {
         clearTimeout(timer.current);
       }
     };
-  }, [successDelete]);
+  }, [successDeletePost]);
+  useEffect(() => {
+    if (successDeleteImage) {
+      setShowSuccessDeleteImageTab(true);
+      timer.current = setTimeout(() => {
+        setShowSuccessDeleteImageTab(false);
+      }, 3000);
+    }
+    return () => {
+      if (!successDeleteImage) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [successDeleteImage]);
 
   const handleOnDeleteModal = async (id) => {
     await dispatch(deletePost(id));
     setPostDelete(false);
     history.push('/dashboard');
     dispatch(fetchPostsList());
+    dispatch({ type: POST_DELETE_RESET });
   };
   const handleOnDeleteImageModal = async (id) => {
     await dispatch(deleteImage(id));
     setImageDelete(false);
     history.push('/dashboard');
     dispatch(getImages());
+    dispatch({ type: IMAGE_DELETE_RESET });
   };
 
   const handleDeleteIcon = (id) => {
@@ -109,7 +135,7 @@ const DashboardScreen = ({ history, match }) => {
       <PrimaryButton onClick={() => setPostDelete(false)}>Cancel</PrimaryButton>
     </React.Fragment>
   );
-  if (!posts || !userInfo) {
+  if (!posts) {
     return;
   }
   return (
@@ -128,7 +154,7 @@ const DashboardScreen = ({ history, match }) => {
           actions={renderImageActions}
         />
       )}
-      {showSuccessDeleteTab && <SuccessAlert message='Post Deleted!' />}
+      {showSuccessDeletePostTab && <SuccessAlert message='Post Deleted!' />}
       {loading || (loadingImages && <h1>Loading...</h1>)}
       {error && <h1>{error}</h1>}
       {errorImages && <h1>{errorImages}</h1>}
@@ -161,6 +187,7 @@ const DashboardScreen = ({ history, match }) => {
           })}
         </tbody>
       </Table>
+      {showSuccessDeleteImageTab && <SuccessAlert message='Image Deleted!' />}
       <StyledLink to='/images/create'>
         <IconButtonLarge>
           <AddPhotoAlternateIcon style={{ fontSize: '30px' }} />

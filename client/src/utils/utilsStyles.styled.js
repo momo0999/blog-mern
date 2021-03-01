@@ -325,8 +325,8 @@ export const ModalTitle = styled.h1`
 //Dashboard
 
 export const IconButtonLarge = styled(IconButton)`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   font-size: 40px;
   &:hover {
     color: ${({ theme }) => theme.primaryBlue};
@@ -352,7 +352,7 @@ export const Wrapper = styled.div`
 
 export const Table = styled.table`
   border-collapse: collapse;
-  width: 70%;
+  width: 90%;
   margin-bottom: 30px;
   margin-top: 10px;
 `;
@@ -369,6 +369,6 @@ export const Th = styled.th`
 
 export const Tr = styled.tr`
   &:nth-child(even) {
-    background-color: #dddddd;
+    background-color: ${({ theme }) => theme.lightGrey};
   }
 `;
