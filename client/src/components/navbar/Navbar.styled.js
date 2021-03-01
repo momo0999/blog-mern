@@ -77,6 +77,22 @@ export const StyledLink = styled(Link)`
     transition: color 0.2s ease-in;
   }
 `;
+export const LoginButton = styled.button`
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu,
+    Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  padding: 18px;
+  color: ${({ theme }) => theme.primaryFontColor};
+  &:hover {
+    color: ${({ theme }) => theme.primaryBlue};
+    transition: color 0.2s ease-in;
+  }
+`;
 
 export const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   color: ${({ theme }) => theme.primaryFontColor};

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/userActions';
 import Hamburger from 'hamburger-react';
 import {
   StyledNavbar,
   List,
   StyledLink,
-  StyledShoppingCartIcon,
+  LoginButton,
   StyledAccountCircleIcon,
   Logo,
   LogoLink,
@@ -18,6 +20,8 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   const ref = useRef();
   const menuRef = useRef();
   const linkRef = useRef();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
   useEffect(() => {
     const onBodyClick = (e) => {
       if (
@@ -33,6 +37,9 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
       document.body.removeEventListener('click', onBodyClick);
     };
   }, [setOpenHamburgerMenu]);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <StyledNavbar>
       <LogoLink to='/'>
@@ -48,12 +55,6 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
       <RowContainer>
         <List ref={menuRef} openHamburgerMenu={openHamburgerMenu}>
           <li>
-            <StyledLink to='/images/create'>New Image</StyledLink>
-          </li>
-          <li>
-            <StyledLink to='/posts/create'>New Blog</StyledLink>
-          </li>
-          <li>
             <StyledLink ref={linkRef} to='/'>
               Blog
             </StyledLink>
@@ -62,22 +63,20 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
             <StyledLink to='/photography'>Photogrphy</StyledLink>
           </li>
           <li>
-            <StyledLink to='/about'>About</StyledLink>
-          </li>
-          <li>
-            <StyledLink to='/shopping/checkout'>Shop</StyledLink>
+            {userInfo ? (
+              <LoginButton onClick={handleLogout}>Logout</LoginButton>
+            ) : (
+              <StyledLink to='/login'>login</StyledLink>
+            )}
           </li>
           <LinksContainer>
-            <li>
-              <StyledLink to='/login'>
-                <StyledAccountCircleIcon />
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink to='/shopping/checkout'>
-                <StyledShoppingCartIcon />
-              </StyledLink>
-            </li>
+            {userInfo && userInfo.isAdmin && (
+              <li>
+                <StyledLink to='/dashboard'>
+                  <StyledAccountCircleIcon />
+                </StyledLink>
+              </li>
+            )}
             <li>
               <StyledLink to='/Search'>
                 <StyledSearchIcon />

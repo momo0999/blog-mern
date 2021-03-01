@@ -11,9 +11,10 @@ import {
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
-const CreateImageScreen = () => {
+const CreateImageScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.imageCreate);
+  const { userInfo } = useSelector((state) => state.userLogin);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [formValues, setFormValues] = useState({
     img: '',
@@ -21,7 +22,11 @@ const CreateImageScreen = () => {
   });
   const { img, category } = formValues;
   const timer = useRef();
+
   useEffect(() => {
+    if (!userInfo || !userInfo.isAdmin) {
+      history.push('/');
+    }
     if (success) {
       setShowSuccessTab(true);
       timer.current = setTimeout(() => {
@@ -33,7 +38,7 @@ const CreateImageScreen = () => {
         clearTimeout(timer.current);
       }
     };
-  }, [success]);
+  }, [success, history]);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -48,33 +53,36 @@ const CreateImageScreen = () => {
       content: '',
     });
   };
+
   return (
     <StyledHomeScreen>
-      <Form onSubmit={handleOnSubmit}>
-        {showSuccessTab && <SuccessAlert message='Image Created!' />}
-        <WrapperLabelInput>
-          <Label>Image</Label>
-          <Input
-            value={img}
-            onChange={handleOnChange}
-            name='img'
-            placeholder='Image URL'
-          />
-        </WrapperLabelInput>
+      {userInfo && userInfo.isAdmin && (
+        <Form onSubmit={handleOnSubmit}>
+          {showSuccessTab && <SuccessAlert message='Image Created!' />}
+          <WrapperLabelInput>
+            <Label>Image</Label>
+            <Input
+              value={img}
+              onChange={handleOnChange}
+              name='img'
+              placeholder='Image URL'
+            />
+          </WrapperLabelInput>
 
-        <WrapperLabelInput>
-          <Label>Category</Label>
-          <Input
-            onChange={handleOnChange}
-            name='category'
-            placeholder='Enter your category'
-            value={category}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Button type='submit'>Submit</Button>
-        </WrapperLabelInput>
-      </Form>
+          <WrapperLabelInput>
+            <Label>Category</Label>
+            <Input
+              onChange={handleOnChange}
+              name='category'
+              placeholder='Enter your category'
+              value={category}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Button type='submit'>Submit</Button>
+          </WrapperLabelInput>
+        </Form>
+      )}
     </StyledHomeScreen>
   );
 };

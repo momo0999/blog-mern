@@ -12,9 +12,10 @@ import {
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
-const CreatePostScreen = () => {
+const CreatePostScreen = ({ history }) => {
   const dispatch = useDispatch();
   const timer = useRef();
+  const { userInfo } = useSelector((state) => state.userLogin);
   const { success } = useSelector((state) => state.postCreate);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -31,6 +32,9 @@ const CreatePostScreen = () => {
   };
 
   useEffect(() => {
+    if (!userInfo || !userInfo.isAdmin) {
+      history.push('/');
+    }
     if (success) {
       setShowSuccessTab(true);
       timer.current = setTimeout(() => {
@@ -42,7 +46,7 @@ const CreatePostScreen = () => {
         clearTimeout(timer.current);
       }
     };
-  }, [success]);
+  }, [success, history]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -56,48 +60,50 @@ const CreatePostScreen = () => {
   };
   return (
     <StyledHomeScreen>
-      <Form onSubmit={handleOnSubmit}>
-        {showSuccessTab && <SuccessAlert message='Post Created!' />}
-        <WrapperLabelInput>
-          <Label>Title</Label>
-          <Input
-            onChange={handleOnChange}
-            name='title'
-            placeholder='Enter your title'
-            value={title}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Label>Category</Label>
-          <Input
-            onChange={handleOnChange}
-            name='category'
-            placeholder='Enter your category'
-            value={category}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Label>Image</Label>
-          <Input
-            value={img}
-            onChange={handleOnChange}
-            name='img'
-            placeholder='Image URL'
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Label>Post</Label>
-          <Textarea
-            onChange={handleOnChange}
-            name='content'
-            placeholder='Enter your content'
-            value={content}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Button type='submit'>Submit</Button>
-        </WrapperLabelInput>
-      </Form>
+      {userInfo && userInfo.isAdmin && (
+        <Form onSubmit={handleOnSubmit}>
+          {showSuccessTab && <SuccessAlert message='Post Created!' />}
+          <WrapperLabelInput>
+            <Label>Title</Label>
+            <Input
+              onChange={handleOnChange}
+              name='title'
+              placeholder='Enter your title'
+              value={title}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Label>Category</Label>
+            <Input
+              onChange={handleOnChange}
+              name='category'
+              placeholder='Enter your category'
+              value={category}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Label>Image</Label>
+            <Input
+              value={img}
+              onChange={handleOnChange}
+              name='img'
+              placeholder='Image URL'
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Label>Post</Label>
+            <Textarea
+              onChange={handleOnChange}
+              name='content'
+              placeholder='Enter your content'
+              value={content}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Button type='submit'>Submit</Button>
+          </WrapperLabelInput>
+        </Form>
+      )}
     </StyledHomeScreen>
   );
 };

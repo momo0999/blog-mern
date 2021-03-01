@@ -72,10 +72,18 @@ export const fetchPostsByCategory = (category) => async (dispatch) => {
   }
 };
 
-export const createPost = (formValues) => async (dispatch) => {
+export const createPost = (formValues) => async (dispatch, getState) => {
   try {
     dispatch({ type: POST_CREATE_REQUEST });
-    const { data } = await axios.post('/api/posts', formValues);
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.post('/api/posts', formValues, config);
     dispatch({ type: POST_CREATE_SUCCESS, payload: data });
     dispatch({ type: POST_CREATE_RESET });
   } catch (error) {
