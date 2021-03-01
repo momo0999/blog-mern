@@ -320,3 +320,36 @@ export const ModalButtonWrapper = styled.div`
 export const ModalTitle = styled.h1`
   slef-align: flex-start;
 `;
+
+//Dashboard
+
+export const ButtonIcon = styled.button`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 2px;
+  &:hover {
+    color: ${({ theme }) => theme.primaryBlue};
+  }
+`;
+
+export const Table = styled.table`
+  border-collapse: collapse;
+  width: 100%;
+`;
+export const Td = styled.td`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+`;
+export const Th = styled.th`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+`;
+
+export const Tr = styled.tr`
+  &:nth-child(even) {
+    background-color: #dddddd;
+  }
+`;

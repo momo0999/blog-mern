@@ -15,6 +15,7 @@ import EditPostScreen from './components/screens/EditPostScreen';
 import CreateImageScreen from './components/screens/CreateImageScreen';
 import DeleteImageScreen from './components/screens/DeleteImageScreen';
 import LoginScreen from './components/screens/LoginScreen';
+import DashboardScreen from './components/screens/DashboardScreen';
 
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
           />
           <Route exact path='/' component={HomeScreen} />
           <Route path='/login' component={LoginScreen} />
+          <Route path='/dashboard' component={DashboardScreen} />
           <Route path='/posts/create' component={CreatePostScreen} />
           <Route path='/posts/edit/:id' component={EditPostScreen} />
           <Route exact path='/photography' component={PhotographyScreen} />

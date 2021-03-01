@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editPost, fetchPostDetail } from '../../actions/postActions';
+import { editPost } from '../../actions/postActions';
 import {
   Form,
   WrapperLabelInput,
@@ -31,7 +31,6 @@ const EditPostScreen = ({ match }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchPostDetail(match.params.id));
     if (success) {
       const setTimeoutId = setTimeout(() => {
         setShowSuccessTab(true);
