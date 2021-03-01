@@ -14,6 +14,8 @@ import {
   imageDeleteReducer,
 } from './imageReducers';
 
+import { userLoginReducer } from './userReducer';
+
 export default combineReducers({
   postList: postListReducer,
   postDetail: postDetailReducer,
@@ -25,4 +27,5 @@ export default combineReducers({
   postCreate: postCreateReducer,
   postDelete: postDeleteReducer,
   postEdit: postEditReducer,
+  userLogin: userLoginReducer,
 });

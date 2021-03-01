@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/userActions';
 import Hamburger from 'hamburger-react';
 import {
   StyledNavbar,
   List,
   StyledLink,
+  LoginButton,
   StyledShoppingCartIcon,
   StyledAccountCircleIcon,
   Logo,
@@ -18,6 +21,8 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   const ref = useRef();
   const menuRef = useRef();
   const linkRef = useRef();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
   useEffect(() => {
     const onBodyClick = (e) => {
       if (
@@ -33,6 +38,9 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
       document.body.removeEventListener('click', onBodyClick);
     };
   }, [setOpenHamburgerMenu]);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <StyledNavbar>
       <LogoLink to='/'>
@@ -62,10 +70,11 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
             <StyledLink to='/photography'>Photogrphy</StyledLink>
           </li>
           <li>
-            <StyledLink to='/about'>About</StyledLink>
-          </li>
-          <li>
-            <StyledLink to='/shopping/checkout'>Shop</StyledLink>
+            {userInfo ? (
+              <LoginButton onClick={handleLogout}>Logout</LoginButton>
+            ) : (
+              <StyledLink to='/login'>login</StyledLink>
+            )}
           </li>
           <LinksContainer>
             <li>

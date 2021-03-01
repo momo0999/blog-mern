@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
           openHamburgerMenu && theme.mobileFirstShowCase
             ? 'hidden'
             : 'visible'};
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     }
 
 `;
