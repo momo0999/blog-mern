@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { POST_DELETE_RESET, IMAGE_DELETE_RESET } from '../../actions/types';
 import {
@@ -139,81 +139,91 @@ const DashboardScreen = ({ history, match }) => {
     return;
   }
   return (
-    <Wrapper>
-      {postDelete && (
-        <Modal
-          title='Delete Blog'
-          content='Are you sure you want to delete this blog?'
-          actions={renderActions}
-        />
-      )}
-      {imageDelete && (
-        <Modal
-          title='Delete Image'
-          content='Are you sure you want to delete this Image?'
-          actions={renderImageActions}
-        />
-      )}
-      {showSuccessDeletePostTab && <SuccessAlert message='Post Deleted!' />}
-      {loading || (loadingImages && <h1>Loading...</h1>)}
-      {error && <h1>{error}</h1>}
-      {errorImages && <h1>{errorImages}</h1>}
-      <StyledLink to='/posts/create'>
-        <IconButtonLarge>
-          <PostAddIcon style={{ fontSize: '30px' }}></PostAddIcon>
-        </IconButtonLarge>
-      </StyledLink>
-      <Table>
-        <tbody>
-          <Tr>
-            <Th>Title</Th>
-            <Th>Edit/Delete</Th>
-          </Tr>
-          {posts.map((post) => {
-            return (
-              <Tr key={post._id}>
-                <Td>{post.title}</Td>
-                <Td>
-                  <IconButtonLarge onClick={() => handleEditPost(post._id)}>
-                    <EditIcon></EditIcon>
-                  </IconButtonLarge>
+    <Fragment>
+      {userInfo && userInfo.isAdmin && (
+        <Wrapper>
+          {postDelete && (
+            <Modal
+              title='Delete Blog'
+              content='Are you sure you want to delete this blog?'
+              actions={renderActions}
+            />
+          )}
+          {imageDelete && (
+            <Modal
+              title='Delete Image'
+              content='Are you sure you want to delete this Image?'
+              actions={renderImageActions}
+            />
+          )}
+          {showSuccessDeletePostTab && <SuccessAlert message='Post Deleted!' />}
+          {loading || (loadingImages && <h1>Loading...</h1>)}
+          {error && <h1>{error}</h1>}
+          {errorImages && <h1>{errorImages}</h1>}
+          <StyledLink to='/posts/create'>
+            <IconButtonLarge>
+              <PostAddIcon style={{ fontSize: '30px' }}></PostAddIcon>
+            </IconButtonLarge>
+          </StyledLink>
+          <Table>
+            <tbody>
+              <Tr>
+                <Th>Title</Th>
+                <Th>Edit/Delete</Th>
+              </Tr>
+              {posts.map((post) => {
+                return (
+                  <Tr key={post._id}>
+                    <Td>{post.title}</Td>
+                    <Td>
+                      <IconButtonLarge onClick={() => handleEditPost(post._id)}>
+                        <EditIcon></EditIcon>
+                      </IconButtonLarge>
 
-                  <IconButtonLarge onClick={() => handleDeleteIcon(post._id)}>
-                    <DeleteIcon></DeleteIcon>
-                  </IconButtonLarge>
-                </Td>
+                      <IconButtonLarge
+                        onClick={() => handleDeleteIcon(post._id)}
+                      >
+                        <DeleteIcon></DeleteIcon>
+                      </IconButtonLarge>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </tbody>
+          </Table>
+          {showSuccessDeleteImageTab && (
+            <SuccessAlert message='Image Deleted!' />
+          )}
+          <StyledLink to='/images/create'>
+            <IconButtonLarge>
+              <AddPhotoAlternateIcon style={{ fontSize: '30px' }} />
+            </IconButtonLarge>
+          </StyledLink>
+          <Table>
+            <tbody>
+              <Tr>
+                <Th>Title</Th>
+                <Th>Edit/Delete</Th>
               </Tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      {showSuccessDeleteImageTab && <SuccessAlert message='Image Deleted!' />}
-      <StyledLink to='/images/create'>
-        <IconButtonLarge>
-          <AddPhotoAlternateIcon style={{ fontSize: '30px' }} />
-        </IconButtonLarge>
-      </StyledLink>
-      <Table>
-        <tbody>
-          <Tr>
-            <Th>Title</Th>
-            <Th>Edit/Delete</Th>
-          </Tr>
-          {images.map((image) => {
-            return (
-              <Tr key={image._id}>
-                <Td>{image._id}</Td>
-                <Td>
-                  <IconButtonLarge onClick={() => handleDeleteImage(image._id)}>
-                    <DeleteIcon></DeleteIcon>
-                  </IconButtonLarge>
-                </Td>
-              </Tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </Wrapper>
+              {images.map((image) => {
+                return (
+                  <Tr key={image._id}>
+                    <Td>{image._id}</Td>
+                    <Td>
+                      <IconButtonLarge
+                        onClick={() => handleDeleteImage(image._id)}
+                      >
+                        <DeleteIcon></DeleteIcon>
+                      </IconButtonLarge>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </Wrapper>
+      )}
+    </Fragment>
   );
 };
 
