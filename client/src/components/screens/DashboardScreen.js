@@ -5,26 +5,48 @@ import {
   deletePost,
   fetchPostDetail,
 } from '../../actions/postActions';
-import { Td, Table, Tr, Th, ButtonIcon } from '../../utils/utilsStyles.styled';
-import { Link } from 'react-router-dom';
-import { DangerButton, PrimaryButton } from '../../utils/utilsStyles.styled';
+import { getImages, deleteImage } from '../../actions/imageActions';
+import {
+  Td,
+  Table,
+  Tr,
+  Th,
+  DangerButton,
+  PrimaryButton,
+  IconButtonLarge,
+  Wrapper,
+} from '../../utils/utilsStyles.styled';
+import { StyledLink } from '../navbar/Navbar.styled';
 import Modal from '../Modal';
 import SuccessAlert from '../SuccessAlert';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 
 const DashboardScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   const timer = useRef();
+  const { images, loading: loadingImages, error: errorImages } = useSelector(
+    (state) => state.imageList
+  );
+  const { userInfo } = useSelector((state) => state.userLogin);
   const { posts, loading, error } = useSelector((state) => state.postList);
   const { success: successDelete } = useSelector((state) => state.postDelete);
   const [postDelete, setPostDelete] = useState(false);
-  const [showSuccessDeleteTab, setShowSuccessDeleteTab] = useState(false);
   const [postId, setPostId] = useState('');
+  const [imageDelete, setImageDelete] = useState(false);
+  const [imageId, setImageId] = useState('');
+  const [showSuccessDeleteTab, setShowSuccessDeleteTab] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchPostsList());
-  }, [dispatch]);
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(fetchPostsList());
+      dispatch(getImages());
+    } else {
+      history.push('/');
+    }
+  }, [dispatch, userInfo, history]);
 
   useEffect(() => {
     if (successDelete) {
@@ -46,6 +68,12 @@ const DashboardScreen = ({ history, match }) => {
     history.push('/dashboard');
     dispatch(fetchPostsList());
   };
+  const handleOnDeleteImageModal = async (id) => {
+    await dispatch(deleteImage(id));
+    setImageDelete(false);
+    history.push('/dashboard');
+    dispatch(getImages());
+  };
 
   const handleDeleteIcon = (id) => {
     setPostDelete(true);
@@ -57,6 +85,22 @@ const DashboardScreen = ({ history, match }) => {
     history.push(`/posts/edit/${id}`);
   };
 
+  const handleDeleteImage = (id) => {
+    setImageDelete(true);
+    setImageId(id);
+  };
+
+  const renderImageActions = (
+    <React.Fragment>
+      <DangerButton onClick={() => handleOnDeleteImageModal(imageId)}>
+        Delete
+      </DangerButton>
+      <PrimaryButton onClick={() => setImageDelete(false)}>
+        Cancel
+      </PrimaryButton>
+    </React.Fragment>
+  );
+
   const renderActions = (
     <React.Fragment>
       <DangerButton onClick={() => handleOnDeleteModal(postId)}>
@@ -65,11 +109,11 @@ const DashboardScreen = ({ history, match }) => {
       <PrimaryButton onClick={() => setPostDelete(false)}>Cancel</PrimaryButton>
     </React.Fragment>
   );
-  if (!posts) {
+  if (!posts || !userInfo) {
     return;
   }
   return (
-    <div>
+    <Wrapper>
       {postDelete && (
         <Modal
           title='Delete Blog'
@@ -77,38 +121,72 @@ const DashboardScreen = ({ history, match }) => {
           actions={renderActions}
         />
       )}
+      {imageDelete && (
+        <Modal
+          title='Delete Image'
+          content='Are you sure you want to delete this Image?'
+          actions={renderImageActions}
+        />
+      )}
       {showSuccessDeleteTab && <SuccessAlert message='Post Deleted!' />}
-      {loading && <h1>Loading...</h1>}
+      {loading || (loadingImages && <h1>Loading...</h1>)}
       {error && <h1>{error}</h1>}
+      {errorImages && <h1>{errorImages}</h1>}
+      <StyledLink to='/posts/create'>
+        <IconButtonLarge>
+          <PostAddIcon style={{ fontSize: '30px' }}></PostAddIcon>
+        </IconButtonLarge>
+      </StyledLink>
       <Table>
         <tbody>
           <Tr>
-            <Th>ID</Th>
             <Th>Title</Th>
             <Th>Edit/Delete</Th>
           </Tr>
           {posts.map((post) => {
             return (
               <Tr key={post._id}>
-                <Td>{post._id}</Td>
                 <Td>{post.title}</Td>
                 <Td>
-                  <ButtonIcon
-                    onClick={() => handleEditPost(post._id)}
-                    to={`/posts/edit/${post._id}`}
-                  >
+                  <IconButtonLarge onClick={() => handleEditPost(post._id)}>
                     <EditIcon></EditIcon>
-                  </ButtonIcon>
-                  <ButtonIcon onClick={() => handleDeleteIcon(post._id)}>
+                  </IconButtonLarge>
+
+                  <IconButtonLarge onClick={() => handleDeleteIcon(post._id)}>
                     <DeleteIcon></DeleteIcon>
-                  </ButtonIcon>
+                  </IconButtonLarge>
                 </Td>
               </Tr>
             );
           })}
         </tbody>
       </Table>
-    </div>
+      <StyledLink to='/images/create'>
+        <IconButtonLarge>
+          <AddPhotoAlternateIcon style={{ fontSize: '30px' }} />
+        </IconButtonLarge>
+      </StyledLink>
+      <Table>
+        <tbody>
+          <Tr>
+            <Th>Title</Th>
+            <Th>Edit/Delete</Th>
+          </Tr>
+          {images.map((image) => {
+            return (
+              <Tr key={image._id}>
+                <Td>{image._id}</Td>
+                <Td>
+                  <IconButtonLarge onClick={() => handleDeleteImage(image._id)}>
+                    <DeleteIcon></DeleteIcon>
+                  </IconButtonLarge>
+                </Td>
+              </Tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </Wrapper>
   );
 };
 

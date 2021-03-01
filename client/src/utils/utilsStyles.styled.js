@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
 
 export const CategoryLink = styled(Link)`
   text-decoration: none;
@@ -323,6 +324,15 @@ export const ModalTitle = styled.h1`
 
 //Dashboard
 
+export const IconButtonLarge = styled(IconButton)`
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  &:hover {
+    color: ${({ theme }) => theme.primaryBlue};
+  }
+`;
+
 export const ButtonIcon = styled.button`
   border: none;
   cursor: pointer;
@@ -333,9 +343,18 @@ export const ButtonIcon = styled.button`
   }
 `;
 
+export const Wrapper = styled.div`
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Table = styled.table`
   border-collapse: collapse;
-  width: 100%;
+  width: 70%;
+  margin-bottom: 30px;
+  margin-top: 10px;
 `;
 export const Td = styled.td`
   border: 1px solid #dddddd;
