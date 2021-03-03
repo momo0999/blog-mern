@@ -202,8 +202,8 @@ const DashboardScreen = ({ history, match }) => {
           <Table>
             <tbody>
               <Tr>
-                <Th>Title</Th>
-                <Th>Edit/Delete</Th>
+                <Th>ID</Th>
+                <Th>Delete</Th>
               </Tr>
               {images.map((image) => {
                 return (

@@ -1,6 +1,21 @@
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
+import LoopIcon from '@material-ui/icons/Loop';
+
+export const rotateInfinite = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Loader = styled(LoopIcon)`
+  animation: ${rotateInfinite} 2s linear infinite;
+`;
 
 export const CategoryLink = styled(Link)`
   text-decoration: none;
@@ -17,7 +32,7 @@ export const PrimaryLink = styled(Link)`
   padding: 8px 30px;
   border-radius: 2px;
   font-size: 15px;
-  margin: 10px;
+  margin: 20px;
   background-color: ${({ theme }) => theme.lightGrey};
   color: ${({ theme }) => theme.primaryDark};
   &:hover {
@@ -79,11 +94,15 @@ export const ImageContainer = styled.div`
   align-items: center;
   align-content: center;
   overflow: hidden;
-  max-width: 70%;
+  max-width: 60%;
   margin: 20px;
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    max-width: 100%;
-    margin: 20px;
+    max-width: 70%;
+    margin: 10px;
+  }
+  @media (max-width: ${({ theme }) => theme.mobileFirstShowCase}) {
+    max-width: 80%;
+    margin: 10px;
   }
 `;
 
@@ -93,9 +112,10 @@ export const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 60%;
+  margin: 20px;
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    max-width: 100%;
-    margin: 20px;
+    max-width: 80%;
+    margin: 30px;
   }
 `;
 
@@ -122,14 +142,14 @@ export const StyledHomeScreen = styled.div`
   justify-content: center;
   text-align: center;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 20px auto;
 `;
 
 export const Container = styled.div`
   display: flex;
   height: 100%;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -138,10 +158,11 @@ export const ImagePhotography = styled.img`
   object-fit: cover;
   width: 400px;
   height: 400px;
-  margin: 20px;
+  margin: 10px;
+
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    margin: 10px;
-    width: 90%;
+    max-width: 80%;
+    margin: 20px auto;
   }
 `;
 
@@ -168,7 +189,7 @@ export const ModelDiv = styled.div`
 export const ModelImage = styled.img`
   display: block;
   max-width: 100%;
-  max-height: 80%;
+  max-height: 90%;
   margin: 70px auto;
   box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
   border: 3px solid white;

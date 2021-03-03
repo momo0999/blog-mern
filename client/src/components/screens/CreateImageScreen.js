@@ -38,7 +38,7 @@ const CreateImageScreen = ({ history }) => {
         clearTimeout(timer.current);
       }
     };
-  }, [success, history]);
+  }, [success, history, userInfo]);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });

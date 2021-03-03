@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginDemo } from '../../actions/userActions';
+import { loginDemo, login } from '../../actions/userActions';
 import {
   Form,
   WrapperLabelInput,
@@ -31,7 +31,7 @@ const LoginScreen = ({ history }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log('Login');
+    dispatch(login(formValues));
   };
 
   const handleDemoLogin = () => {

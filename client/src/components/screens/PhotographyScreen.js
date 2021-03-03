@@ -6,10 +6,11 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+  CategoryLink,
+  RowWrapper,
 } from '../../utils/utilsStyles.styled';
 import Image from '../Image';
 import ImageModel from '../ImageModel';
-import CategoriesImageLinks from '../CategoriesImageLinks';
 
 const PhotographyScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -18,6 +19,7 @@ const PhotographyScreen = () => {
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
+  const allCategories = [...new Set(images.map((image) => image.category))];
   if (!images) {
     return;
   }
@@ -26,7 +28,15 @@ const PhotographyScreen = () => {
       <PageTitleWrapper>
         <PageTitle>Photography</PageTitle>
       </PageTitleWrapper>
-      <CategoriesImageLinks images={images} />
+      <RowWrapper>
+        {allCategories.map((category, index) => {
+          return (
+            <CategoryLink key={index} to={`/photography/category/${category}`}>
+              {category}
+            </CategoryLink>
+          );
+        })}
+      </RowWrapper>
       {selectedImage && (
         <ImageModel
           selectedImage={selectedImage}

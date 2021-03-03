@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getImagesByCategory } from '../../actions/imageActions';
 import Image from '../Image';
 import ImageModel from '../ImageModel';
-import CategoriesImageLinks from '../CategoriesImageLinks';
 import {
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
   ImagesList,
+  PrimaryLink,
 } from '../../utils/utilsStyles.styled';
 
 const PostCategoryScreen = ({ match }) => {
@@ -28,7 +28,6 @@ const PostCategoryScreen = ({ match }) => {
       <PageTitleWrapper>
         <PageTitle>Photography</PageTitle>
       </PageTitleWrapper>
-      <CategoriesImageLinks images={images} />
       {selectedImage && (
         <ImageModel
           selectedImage={selectedImage}
@@ -36,6 +35,7 @@ const PostCategoryScreen = ({ match }) => {
         />
       )}
 
+      <PrimaryLink to='/photography'>Back to all images</PrimaryLink>
       <StyledHomeScreen>
         <ImagesList>
           {loading && <h1>Loading...</h1>}

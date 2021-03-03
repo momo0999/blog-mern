@@ -53,7 +53,7 @@ const createPost = asyncHandler(async (req, res) => {
     title,
     content,
     img,
-    category,
+    category: category.toLowerCase().trim(),
   });
   const createdPost = await post.save();
   res.status(201).json(createdPost);

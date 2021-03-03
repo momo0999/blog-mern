@@ -2,13 +2,13 @@ import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsByCategory } from '../../actions/postActions';
 import Post from '../Post';
-import CategoriesPostLinks from '../CategoriesPostLinks';
 import {
   RowWrapper,
   Container,
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
+  PrimaryLink,
 } from '../../utils/utilsStyles.styled';
 
 const PostCategoryScreen = ({ match }) => {
@@ -25,9 +25,9 @@ const PostCategoryScreen = ({ match }) => {
       <PageTitleWrapper>
         <PageTitle>Blog</PageTitle>
       </PageTitleWrapper>
-      <RowWrapper>
-        <CategoriesPostLinks posts={posts} />
-      </RowWrapper>
+
+      <PrimaryLink to='/'>Back to all articles</PrimaryLink>
+
       <StyledHomeScreen>
         <Container>
           {loading && <h1>loading...</h1>}

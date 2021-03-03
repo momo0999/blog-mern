@@ -66,7 +66,7 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
             {userInfo ? (
               <LoginButton onClick={handleLogout}>Logout</LoginButton>
             ) : (
-              <StyledLink to='/login'>login</StyledLink>
+              <StyledLink to='/login'>Login</StyledLink>
             )}
           </li>
           <LinksContainer>

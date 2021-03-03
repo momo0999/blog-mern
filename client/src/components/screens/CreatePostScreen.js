@@ -28,7 +28,10 @@ const CreatePostScreen = ({ history }) => {
   const { title, content, category, img } = formValues;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({
+      ...formValues,
+      [name]: value === category ? value.toLowerCase() : value,
+    });
   };
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const CreatePostScreen = ({ history }) => {
         clearTimeout(timer.current);
       }
     };
-  }, [success, history]);
+  }, [success, history, userInfo]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
