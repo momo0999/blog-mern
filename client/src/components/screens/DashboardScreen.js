@@ -16,6 +16,9 @@ import {
   PrimaryButton,
   IconButtonLarge,
   Wrapper,
+  Loader,
+  PageTitleWrapper,
+  PageTitle,
 } from '../../utils/utilsStyles.styled';
 import { StyledLink } from '../navbar/Navbar.styled';
 import Modal from '../Modal';
@@ -24,6 +27,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import ErrorAlert from '../ErrorAlert';
 
 const DashboardScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -135,11 +139,16 @@ const DashboardScreen = ({ history, match }) => {
       <PrimaryButton onClick={() => setPostDelete(false)}>Cancel</PrimaryButton>
     </React.Fragment>
   );
-  if (!posts) {
+  if (!posts && !images) {
     return;
   }
   return (
     <Fragment>
+      {loading && <Loader />}
+      {error && <ErrorAlert error={error} />}
+      <PageTitleWrapper>
+        <PageTitle>Dashboard</PageTitle>
+      </PageTitleWrapper>
       {userInfo && userInfo.isAdmin && (
         <Wrapper>
           {postDelete && (
@@ -157,40 +166,44 @@ const DashboardScreen = ({ history, match }) => {
             />
           )}
           {showSuccessDeletePostTab && <SuccessAlert message='Post Deleted!' />}
-          {loading || (loadingImages && <h1>Loading...</h1>)}
-          {error && <h1>{error}</h1>}
-          {errorImages && <h1>{errorImages}</h1>}
+          {loading ||
+            (loadingImages && <Loader style={{ fontSize: '80px' }} />)}
+          {error && <ErrorAlert error={error} />}
           <StyledLink to='/posts/create'>
             <IconButtonLarge>
               <PostAddIcon style={{ fontSize: '30px' }}></PostAddIcon>
             </IconButtonLarge>
           </StyledLink>
-          <Table>
-            <tbody>
-              <Tr>
-                <Th>Title</Th>
-                <Th>Edit/Delete</Th>
-              </Tr>
-              {posts.map((post) => {
-                return (
-                  <Tr key={post._id}>
-                    <Td>{post.title}</Td>
-                    <Td>
-                      <IconButtonLarge onClick={() => handleEditPost(post._id)}>
-                        <EditIcon></EditIcon>
-                      </IconButtonLarge>
+          {posts && (
+            <Table>
+              <tbody>
+                <Tr>
+                  <Th>Title</Th>
+                  <Th>Edit/Delete</Th>
+                </Tr>
+                {posts.map((post) => {
+                  return (
+                    <Tr key={post._id}>
+                      <Td>{post.title}</Td>
+                      <Td>
+                        <IconButtonLarge
+                          onClick={() => handleEditPost(post._id)}
+                        >
+                          <EditIcon></EditIcon>
+                        </IconButtonLarge>
 
-                      <IconButtonLarge
-                        onClick={() => handleDeleteIcon(post._id)}
-                      >
-                        <DeleteIcon></DeleteIcon>
-                      </IconButtonLarge>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                        <IconButtonLarge
+                          onClick={() => handleDeleteIcon(post._id)}
+                        >
+                          <DeleteIcon></DeleteIcon>
+                        </IconButtonLarge>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
           {showSuccessDeleteImageTab && (
             <SuccessAlert message='Image Deleted!' />
           )}
@@ -199,28 +212,31 @@ const DashboardScreen = ({ history, match }) => {
               <AddPhotoAlternateIcon style={{ fontSize: '30px' }} />
             </IconButtonLarge>
           </StyledLink>
-          <Table>
-            <tbody>
-              <Tr>
-                <Th>ID</Th>
-                <Th>Delete</Th>
-              </Tr>
-              {images.map((image) => {
-                return (
-                  <Tr key={image._id}>
-                    <Td>{image._id}</Td>
-                    <Td>
-                      <IconButtonLarge
-                        onClick={() => handleDeleteImage(image._id)}
-                      >
-                        <DeleteIcon></DeleteIcon>
-                      </IconButtonLarge>
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </tbody>
-          </Table>
+          {error && <ErrorAlert error={errorImages} />}
+          {images && (
+            <Table>
+              <tbody>
+                <Tr>
+                  <Th>ID</Th>
+                  <Th>Delete</Th>
+                </Tr>
+                {images.map((image) => {
+                  return (
+                    <Tr key={image._id}>
+                      <Td>{image._id}</Td>
+                      <Td>
+                        <IconButtonLarge
+                          onClick={() => handleDeleteImage(image._id)}
+                        >
+                          <DeleteIcon></DeleteIcon>
+                        </IconButtonLarge>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
         </Wrapper>
       )}
     </Fragment>

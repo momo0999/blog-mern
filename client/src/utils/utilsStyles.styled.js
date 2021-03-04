@@ -257,12 +257,14 @@ export const Input = styled.input`
   font-size: 15px;
   letter-spacing: 1px;
   box-shadow: none;
-  max-width: 100%;
-  width: 100%;
+  width: 80%;
   border: 1px solid #e7e7e7;
-  width: 100%;
   height: 35px;
   padding: 25px 10px;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    width: 100%;
+    margin: 20px auto;
+  }
   &::placeholder {
     color: ${({ theme }) => theme.labelFontColor};
     font-size: 15px;
@@ -276,8 +278,7 @@ export const Textarea = styled.textarea`
   color: #363636;
   border-radius: 4px;
   box-shadow: none;
-  max-width: 100%;
-  width: 100%;
+  width: 80%;
   height: 100px;
   padding: 10px 10px;
   border: 1px solid #e7e7e7;
@@ -286,6 +287,10 @@ export const Textarea = styled.textarea`
     font-size: 15px;
     font-weight: 200;
     opacity: 0.8;
+  }
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    width: 100%;
+    margin: 20px auto;
   }
 `;
 
@@ -391,5 +396,46 @@ export const Th = styled.th`
 export const Tr = styled.tr`
   &:nth-child(even) {
     background-color: ${({ theme }) => theme.lightGrey};
+  }
+`;
+
+// Searchbar
+
+export const InputWrapper = styled.div`
+  position: relative;
+  width: 500px;
+  margin: 50px auto;
+`;
+export const InputHighlight = styled.span`
+  font-size: 30px;
+  user-select: none;
+  line-height: 70px;
+  border-top: 3px solid white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 100%;
+  height: 0;
+  color: transparent;
+  overflow: hidden;
+`;
+export const SearchInput = styled.input`
+height: 60px;
+width: 100%;
+min-width: 100%;
+padding: 0;
+border-radius: 0;
+line-height: 70px;
+letter-spacing: 2px;
+background-color: transparent;
+color: #333;
+font-size: 30px;
+border: none;
+outline: none;
+border-bottom: 3px solid #333333;
+
+&:focus {
+   ${InputHighlight} {
+    border-top: 3px solid #fbc91b;
   }
 `;

@@ -8,9 +8,11 @@ import {
   PageTitleWrapper,
   CategoryLink,
   RowWrapper,
+  Loader,
 } from '../../utils/utilsStyles.styled';
 import Image from '../Image';
 import ImageModel from '../ImageModel';
+import ErrorAlert from '../ErrorAlert';
 
 const PhotographyScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -46,8 +48,8 @@ const PhotographyScreen = () => {
 
       <StyledHomeScreen>
         <ImagesList>
-          {loading && <h1>Loading...</h1>}
-          {error && <h1>{error}</h1>}
+          {loading && <Loader style={{ fontSize: '80px' }} />}
+          {error && <ErrorAlert error={error} />}
           {images.map((image) => {
             return (
               <Image

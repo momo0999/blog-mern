@@ -9,7 +9,9 @@ import {
   PageTitleWrapper,
   CategoryLink,
   RowWrapper,
+  Loader,
 } from '../../utils/utilsStyles.styled';
+import ErrorAlert from '../ErrorAlert';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -38,8 +40,8 @@ const HomeScreen = () => {
       </RowWrapper>
       <StyledHomeScreen>
         <Container>
-          {loading && <h1>loading...</h1>}
-          {error && <h3>{error}</h3>}
+          {loading && <Loader style={{ fontSize: '80px' }} />}
+          {error && <ErrorAlert error={error} />}
           {posts.map((post) => {
             return <Post key={post._id} post={post} />;
           })}

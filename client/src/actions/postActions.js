@@ -24,10 +24,10 @@ import {
   POST_EDIT_RESET,
 } from './types';
 
-export const fetchPostsList = () => async (dispatch) => {
+export const fetchPostsList = (debouncedKeyword = '') => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
-    const { data } = await axios.get('/api/posts');
+    const { data } = await axios.get(`/api/posts?keyword=${debouncedKeyword}`);
     dispatch({ type: POST_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -105,7 +105,7 @@ export const editPost = (formValues) => async (dispatch) => {
       formValues
     );
     dispatch({ type: POST_EDIT_SUCCESS, payload: data });
-    dispatch({ type: POST_CREATE_RESET });
+    dispatch({ type: POST_EDIT_RESET });
   } catch (error) {
     dispatch({
       type: POST_EDIT_FAIL,
