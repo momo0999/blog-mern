@@ -18,18 +18,21 @@ const SearchScreen = ({ history, match }) => {
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
   useEffect(() => {
-    timer.current = setTimeout(() => {
-      setDebouncedKeyword(keyword);
-    }, 500);
+    if (keyword && !posts.length) {
+      dispatch(fetchPostsList(debouncedKeyword));
+    } else {
+      timer.current = setTimeout(() => {
+        dispatch(fetchPostsList(keyword));
+      }, 500);
+    }
     return () => {
       clearTimeout(timer.current);
     };
-  }, [keyword]);
+  }, [keyword, dispatch]);
 
-  useEffect(() => {
-    history.push(`/search/${debouncedKeyword}`);
-    dispatch(fetchPostsList(debouncedKeyword));
-  }, [debouncedKeyword, history, dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchPostsList(debouncedKeyword));
+  // }, [debouncedKeyword, history, dispatch, keyword]);
 
   const renderedPosts = posts.map((post) => {
     return <Post key={post._id} post={post} />;

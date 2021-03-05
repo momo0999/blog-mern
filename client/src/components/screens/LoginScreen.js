@@ -42,11 +42,11 @@ const LoginScreen = ({ history }) => {
 
   return (
     <Fragment>
-      <PageTitleWrapper>
-        <PageTitle>Sign In</PageTitle>
-      </PageTitleWrapper>
       <StyledHomeScreen>
         <Form onSubmit={handleOnSubmit}>
+          <PageTitleWrapper>
+            <PageTitle>Sign In</PageTitle>
+          </PageTitleWrapper>
           <WrapperLabelInput>
             <Label>Email</Label>
             <Input

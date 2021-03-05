@@ -80,12 +80,7 @@ export const PostDetail = styled.div`
   align-items: center;
   text-align: center;
   max-width: 1400px;
-  height: 100%;
   margin: 0 auto;
-  @media (max-width: ${({ theme }) => theme.mobileSecondeShowCase}) {
-  }
-  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-  }
 `;
 
 export const ImageContainer = styled.div`
@@ -300,7 +295,7 @@ export const Button = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.primaryLight};
   background-color: ${({ theme }) => theme.primaryDark};
-  padding: 8px 30px;
+  padding: 12px 30px;
   transition: opacity 0.2s ease-in;
   &:hover {
     opacity: 0.8;
@@ -403,8 +398,11 @@ export const Tr = styled.tr`
 
 export const InputWrapper = styled.div`
   position: relative;
-  width: 500px;
-  margin: 50px auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-items: center;
+  jusitify-content: center;
 `;
 export const InputHighlight = styled.span`
   font-size: 30px;
@@ -421,9 +419,7 @@ export const InputHighlight = styled.span`
 `;
 export const SearchInput = styled.input`
 height: 60px;
-width: 100%;
-min-width: 100%;
-padding: 0;
+width: 50%;
 border-radius: 0;
 line-height: 70px;
 letter-spacing: 2px;
@@ -432,7 +428,13 @@ color: #333;
 font-size: 30px;
 border: none;
 outline: none;
+margin: 10px auto;
 border-bottom: 3px solid #333333;
+@media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+  max-width: 80%;
+  margin: 10px auto;
+  font-size: 25px;
+}
 
 &:focus {
    ${InputHighlight} {
