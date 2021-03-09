@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editPost } from '../../actions/postActions';
@@ -9,6 +10,7 @@ import {
   Textarea,
   Button,
   StyledHomeScreen,
+  Loader,
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
@@ -19,6 +21,7 @@ const EditPostScreen = ({ history }) => {
   const { post } = useSelector((state) => state.postDetail);
   const { userInfo } = useSelector((state) => state.userLogin);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [formValues, setFormValues] = useState({
     _id: post._id,
     title: post.title,
@@ -48,6 +51,26 @@ const EditPostScreen = ({ history }) => {
       }
     };
   }, [dispatch, history, userInfo, success]);
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploadingImage(true);
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post('/api/upload', formData, config);
+      setFormValues({ ...formValues, img: data });
+      setUploadingImage(false);
+    } catch (error) {
+      console.error(error);
+      setUploadingImage(false);
+    }
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -84,6 +107,13 @@ const EditPostScreen = ({ history }) => {
             <Input
               value={img}
               onChange={handleOnChange}
+              name='img'
+              placeholder='Image URL'
+            />
+            {uploadingImage && <Loader />}
+            <Input
+              type='file'
+              onChange={uploadFileHandler}
               name='img'
               placeholder='Image URL'
             />
