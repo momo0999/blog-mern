@@ -6,7 +6,15 @@ import asyncHandler from 'express-async-handler';
 // @access Public
 
 const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({});
+  const keyword = req.query.keyword
+    ? {
+        title: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+  const posts = await Post.find({ ...keyword });
   if (posts) {
     res.json(posts);
   } else {
@@ -53,7 +61,7 @@ const createPost = asyncHandler(async (req, res) => {
     title,
     content,
     img,
-    category,
+    category: category.toLowerCase().trim(),
   });
   const createdPost = await post.save();
   res.status(201).json(createdPost);

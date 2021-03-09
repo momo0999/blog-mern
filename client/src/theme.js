@@ -11,5 +11,5 @@ export const theme = {
   extraLightGrey: '#f2f2f2',
   mobileFirstShowCase: '800px',
   mobileSecondeShowCase: '1300px',
-  mobileThirdShowCase: '600px',
+  mobileThirdShowCase: '1000px',
 };

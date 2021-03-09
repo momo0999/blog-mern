@@ -1,6 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
 import Post from '../Post';
-import CategoriesPostLinks from '../CategoriesPostLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsList } from '../../actions/postActions';
 import {
@@ -8,7 +7,11 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+  CategoryLink,
+  RowWrapper,
+  Loader,
 } from '../../utils/utilsStyles.styled';
+import ErrorAlert from '../ErrorAlert';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -16,6 +19,8 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(fetchPostsList());
   }, [dispatch]);
+  const allCategories = [...new Set(posts.map((post) => post.category))];
+
   if (!posts) {
     return;
   }
@@ -24,11 +29,19 @@ const HomeScreen = () => {
       <PageTitleWrapper>
         <PageTitle>Blog</PageTitle>
       </PageTitleWrapper>
-      <CategoriesPostLinks posts={posts} />
+      <RowWrapper>
+        {allCategories.map((category, index) => {
+          return (
+            <CategoryLink key={index} to={`/posts/category/${category}`}>
+              {category}
+            </CategoryLink>
+          );
+        })}
+      </RowWrapper>
       <StyledHomeScreen>
         <Container>
-          {loading && <h1>loading...</h1>}
-          {error && <h3>{error}</h3>}
+          {loading && <Loader style={{ fontSize: '80px' }} />}
+          {error && <ErrorAlert error={error} />}
           {posts.map((post) => {
             return <Post key={post._id} post={post} />;
           })}

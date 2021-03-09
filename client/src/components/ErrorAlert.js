@@ -4,19 +4,20 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '90%',
+    width: '100%',
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
+    margin: '30px',
   },
 }));
 
-export default function SimpleAlerts({ message }) {
+export default function SimpleAlerts({ error }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Alert severity='success'>{message}</Alert>
+      <Alert severity='error'>{error}</Alert>
     </div>
   );
 }

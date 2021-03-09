@@ -1,6 +1,21 @@
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
+import LoopIcon from '@material-ui/icons/Loop';
+
+export const rotateInfinite = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Loader = styled(LoopIcon)`
+  animation: ${rotateInfinite} 2s linear infinite;
+`;
 
 export const CategoryLink = styled(Link)`
   text-decoration: none;
@@ -17,7 +32,7 @@ export const PrimaryLink = styled(Link)`
   padding: 8px 30px;
   border-radius: 2px;
   font-size: 15px;
-  margin: 10px;
+  margin: 20px;
   background-color: ${({ theme }) => theme.lightGrey};
   color: ${({ theme }) => theme.primaryDark};
   &:hover {
@@ -65,12 +80,7 @@ export const PostDetail = styled.div`
   align-items: center;
   text-align: center;
   max-width: 1400px;
-  height: 100%;
   margin: 0 auto;
-  @media (max-width: ${({ theme }) => theme.mobileSecondeShowCase}) {
-  }
-  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-  }
 `;
 
 export const ImageContainer = styled.div`
@@ -79,11 +89,15 @@ export const ImageContainer = styled.div`
   align-items: center;
   align-content: center;
   overflow: hidden;
-  max-width: 70%;
+  max-width: 60%;
   margin: 20px;
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    max-width: 100%;
-    margin: 20px;
+    max-width: 70%;
+    margin: 10px;
+  }
+  @media (max-width: ${({ theme }) => theme.mobileFirstShowCase}) {
+    max-width: 80%;
+    margin: 10px;
   }
 `;
 
@@ -93,9 +107,10 @@ export const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 60%;
+  margin: 20px;
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    max-width: 100%;
-    margin: 20px;
+    max-width: 80%;
+    margin: 30px;
   }
 `;
 
@@ -122,14 +137,14 @@ export const StyledHomeScreen = styled.div`
   justify-content: center;
   text-align: center;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 20px auto;
 `;
 
 export const Container = styled.div`
   display: flex;
   height: 100%;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -138,10 +153,11 @@ export const ImagePhotography = styled.img`
   object-fit: cover;
   width: 400px;
   height: 400px;
-  margin: 20px;
+  margin: 10px;
+
   @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-    margin: 10px;
-    width: 90%;
+    max-width: 80%;
+    margin: 20px auto;
   }
 `;
 
@@ -168,7 +184,7 @@ export const ModelDiv = styled.div`
 export const ModelImage = styled.img`
   display: block;
   max-width: 100%;
-  max-height: 80%;
+  max-height: 90%;
   margin: 70px auto;
   box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
   border: 3px solid white;
@@ -236,12 +252,14 @@ export const Input = styled.input`
   font-size: 15px;
   letter-spacing: 1px;
   box-shadow: none;
-  max-width: 100%;
-  width: 100%;
+  width: 80%;
   border: 1px solid #e7e7e7;
-  width: 100%;
   height: 35px;
   padding: 25px 10px;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    width: 100%;
+    margin: 20px auto;
+  }
   &::placeholder {
     color: ${({ theme }) => theme.labelFontColor};
     font-size: 15px;
@@ -255,8 +273,7 @@ export const Textarea = styled.textarea`
   color: #363636;
   border-radius: 4px;
   box-shadow: none;
-  max-width: 100%;
-  width: 100%;
+  width: 80%;
   height: 100px;
   padding: 10px 10px;
   border: 1px solid #e7e7e7;
@@ -266,6 +283,10 @@ export const Textarea = styled.textarea`
     font-weight: 200;
     opacity: 0.8;
   }
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    width: 100%;
+    margin: 20px auto;
+  }
 `;
 
 export const Button = styled.button`
@@ -274,7 +295,7 @@ export const Button = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.primaryLight};
   background-color: ${({ theme }) => theme.primaryDark};
-  padding: 8px 30px;
+  padding: 12px 30px;
   transition: opacity 0.2s ease-in;
   &:hover {
     opacity: 0.8;
@@ -370,5 +391,53 @@ export const Th = styled.th`
 export const Tr = styled.tr`
   &:nth-child(even) {
     background-color: ${({ theme }) => theme.lightGrey};
+  }
+`;
+
+// Searchbar
+
+export const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-items: center;
+  jusitify-content: center;
+`;
+export const InputHighlight = styled.span`
+  font-size: 30px;
+  user-select: none;
+  line-height: 70px;
+  border-top: 3px solid white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 100%;
+  height: 0;
+  color: transparent;
+  overflow: hidden;
+`;
+export const SearchInput = styled.input`
+height: 60px;
+width: 50%;
+border-radius: 0;
+line-height: 70px;
+letter-spacing: 2px;
+background-color: transparent;
+color: #333;
+font-size: 30px;
+border: none;
+outline: none;
+margin: 10px auto;
+border-bottom: 3px solid #333333;
+@media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+  max-width: 80%;
+  margin: 10px auto;
+  font-size: 25px;
+}
+
+&:focus {
+   ${InputHighlight} {
+    border-top: 3px solid #fbc91b;
   }
 `;

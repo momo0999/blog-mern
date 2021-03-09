@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginDemo } from '../../actions/userActions';
+import { loginDemo, login } from '../../actions/userActions';
 import {
   Form,
   WrapperLabelInput,
@@ -8,6 +8,8 @@ import {
   Input,
   Button,
   StyledHomeScreen,
+  PageTitle,
+  PageTitleWrapper,
 } from '../../utils/utilsStyles.styled';
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const LoginScreen = ({ history }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log('Login');
+    dispatch(login(formValues));
   };
 
   const handleDemoLogin = () => {
@@ -39,34 +41,39 @@ const LoginScreen = ({ history }) => {
   };
 
   return (
-    <StyledHomeScreen>
-      <Form onSubmit={handleOnSubmit}>
-        <WrapperLabelInput>
-          <Label>Email</Label>
-          <Input
-            name='email'
-            type='email'
-            value={email}
-            onChange={handleOnChange}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Label>Password</Label>
-          <Input
-            name='password'
-            type='password'
-            value={password}
-            onChange={handleOnChange}
-          />
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Button type='submit'>Login</Button>
-        </WrapperLabelInput>
-        <WrapperLabelInput>
-          <Button onClick={handleDemoLogin}>Demo Login</Button>
-        </WrapperLabelInput>
-      </Form>
-    </StyledHomeScreen>
+    <Fragment>
+      <StyledHomeScreen>
+        <Form onSubmit={handleOnSubmit}>
+          <PageTitleWrapper>
+            <PageTitle>Sign In</PageTitle>
+          </PageTitleWrapper>
+          <WrapperLabelInput>
+            <Label>Email</Label>
+            <Input
+              name='email'
+              type='email'
+              value={email}
+              onChange={handleOnChange}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Label>Password</Label>
+            <Input
+              name='password'
+              type='password'
+              value={password}
+              onChange={handleOnChange}
+            />
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Button type='submit'>Login</Button>
+          </WrapperLabelInput>
+          <WrapperLabelInput>
+            <Button onClick={handleDemoLogin}>Demo Login</Button>
+          </WrapperLabelInput>
+        </Form>
+      </StyledHomeScreen>
+    </Fragment>
   );
 };
 

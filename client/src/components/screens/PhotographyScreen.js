@@ -6,10 +6,13 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+  CategoryLink,
+  RowWrapper,
+  Loader,
 } from '../../utils/utilsStyles.styled';
 import Image from '../Image';
 import ImageModel from '../ImageModel';
-import CategoriesImageLinks from '../CategoriesImageLinks';
+import ErrorAlert from '../ErrorAlert';
 
 const PhotographyScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -18,6 +21,7 @@ const PhotographyScreen = () => {
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
+  const allCategories = [...new Set(images.map((image) => image.category))];
   if (!images) {
     return;
   }
@@ -26,7 +30,15 @@ const PhotographyScreen = () => {
       <PageTitleWrapper>
         <PageTitle>Photography</PageTitle>
       </PageTitleWrapper>
-      <CategoriesImageLinks images={images} />
+      <RowWrapper>
+        {allCategories.map((category, index) => {
+          return (
+            <CategoryLink key={index} to={`/photography/category/${category}`}>
+              {category}
+            </CategoryLink>
+          );
+        })}
+      </RowWrapper>
       {selectedImage && (
         <ImageModel
           selectedImage={selectedImage}
@@ -36,8 +48,8 @@ const PhotographyScreen = () => {
 
       <StyledHomeScreen>
         <ImagesList>
-          {loading && <h1>Loading...</h1>}
-          {error && <h1>{error}</h1>}
+          {loading && <Loader style={{ fontSize: '80px' }} />}
+          {error && <ErrorAlert error={error} />}
           {images.map((image) => {
             return (
               <Image

@@ -7,7 +7,7 @@ import {
   List,
   StyledLink,
   LoginButton,
-  StyledAccountCircleIcon,
+  StyledDashboard,
   Logo,
   LogoLink,
   StyledSearchIcon,
@@ -66,14 +66,14 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
             {userInfo ? (
               <LoginButton onClick={handleLogout}>Logout</LoginButton>
             ) : (
-              <StyledLink to='/login'>login</StyledLink>
+              <StyledLink to='/login'>Login</StyledLink>
             )}
           </li>
           <LinksContainer>
             {userInfo && userInfo.isAdmin && (
               <li>
                 <StyledLink to='/dashboard'>
-                  <StyledAccountCircleIcon />
+                  <StyledDashboard />
                 </StyledLink>
               </li>
             )}

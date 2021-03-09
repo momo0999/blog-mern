@@ -2,14 +2,15 @@ import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostsByCategory } from '../../actions/postActions';
 import Post from '../Post';
-import CategoriesPostLinks from '../CategoriesPostLinks';
 import {
-  RowWrapper,
   Container,
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
+  PrimaryLink,
+  Loader,
 } from '../../utils/utilsStyles.styled';
+import ErrorAlert from '../ErrorAlert';
 
 const PostCategoryScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -25,13 +26,13 @@ const PostCategoryScreen = ({ match }) => {
       <PageTitleWrapper>
         <PageTitle>Blog</PageTitle>
       </PageTitleWrapper>
-      <RowWrapper>
-        <CategoriesPostLinks posts={posts} />
-      </RowWrapper>
+
+      <PrimaryLink to='/'>Back to all articles</PrimaryLink>
+
       <StyledHomeScreen>
         <Container>
-          {loading && <h1>loading...</h1>}
-          {error && <h3>{error}</h3>}
+          {loading && <Loader style={{ fontSize: '80px' }} />}
+          {error && <ErrorAlert error={error} />}
           {posts.map((post) => {
             return <Post key={post._id} post={post} />;
           })}

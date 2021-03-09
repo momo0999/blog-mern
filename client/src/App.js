@@ -16,6 +16,7 @@ import CreateImageScreen from './components/screens/CreateImageScreen';
 import DeleteImageScreen from './components/screens/DeleteImageScreen';
 import LoginScreen from './components/screens/LoginScreen';
 import DashboardScreen from './components/screens/DashboardScreen';
+import SearchScreen from './components/screens/SearchScreen';
 
 const App = () => {
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
             setOpenHamburgerMenu={setOpenHamburgerMenu}
           />
           <Route exact path='/' component={HomeScreen} />
+          <Route path='/search' component={SearchScreen} />
           <Route path='/login' component={LoginScreen} />
           <Route path='/dashboard' component={DashboardScreen} />
           <Route path='/posts/create' component={CreatePostScreen} />

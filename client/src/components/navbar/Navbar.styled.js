@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 export const StyledNavbar = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ export const List = styled.ul`
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     right: 0;
     top: 0;
@@ -68,7 +69,7 @@ export const LogoLink = styled(Link)`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 200;
   padding: 18px;
   color: ${({ theme }) => theme.primaryFontColor};
@@ -84,7 +85,7 @@ export const LoginButton = styled.button`
     Segoe UI Symbol;
   cursor: pointer;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 200;
   padding: 18px;
   color: ${({ theme }) => theme.primaryFontColor};
@@ -103,7 +104,7 @@ export const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   }
 `;
 
-export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
+export const StyledDashboard = styled(DashboardIcon)`
   color: ${({ theme }) => theme.primaryFontColor};
   vertical-align: middle;
 
