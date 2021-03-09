@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../actions/postActions';
@@ -11,6 +12,7 @@ import {
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
+  Loader,
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
@@ -20,6 +22,7 @@ const CreatePostScreen = ({ history }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const { success } = useSelector((state) => state.postCreate);
   const [showSuccessTab, setShowSuccessTab] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [formValues, setFormValues] = useState({
     title: '',
     category: '',
@@ -53,6 +56,26 @@ const CreatePostScreen = ({ history }) => {
     };
   }, [success, history, userInfo]);
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post('/api/upload', formData, config);
+      setFormValues({ ...formValues, img: data });
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(createPost(formValues));
@@ -67,11 +90,11 @@ const CreatePostScreen = ({ history }) => {
     <Fragment>
       <PageTitleWrapper>
         <PageTitle>Create a new blog</PageTitle>
+        {showSuccessTab && <SuccessAlert message='Post Created!' />}
       </PageTitleWrapper>
       <StyledHomeScreen>
         {userInfo && userInfo.isAdmin && (
           <Form onSubmit={handleOnSubmit}>
-            {showSuccessTab && <SuccessAlert message='Post Created!' />}
             <WrapperLabelInput>
               <Label>Title</Label>
               <Input
@@ -98,6 +121,12 @@ const CreatePostScreen = ({ history }) => {
                 name='img'
                 placeholder='Image URL'
               />
+              <Input
+                type='file'
+                onChange={uploadFileHandler}
+                placeholder='Image Upload'
+              />
+              {uploading && <Loader />}
             </WrapperLabelInput>
             <WrapperLabelInput>
               <Label>Post</Label>
