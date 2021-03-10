@@ -9,6 +9,7 @@ import {
   SearchInput,
   Container,
   Loader,
+  HeaderTextCenter,
 } from '../../utils/utilsStyles.styled';
 import ErrorAlert from '../ErrorAlert';
 const SearchScreen = ({ history, match }) => {
@@ -18,21 +19,20 @@ const SearchScreen = ({ history, match }) => {
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
   useEffect(() => {
-    if (keyword && !posts.length) {
-      dispatch(fetchPostsList(debouncedKeyword));
-    } else {
-      timer.current = setTimeout(() => {
-        dispatch(fetchPostsList(keyword));
-      }, 500);
-    }
+    timer.current = setTimeout(() => {
+      setDebouncedKeyword(keyword);
+    }, 500);
+
     return () => {
       clearTimeout(timer.current);
     };
-  }, [keyword, dispatch]);
+  }, [keyword]);
 
-  // useEffect(() => {
-  //   dispatch(fetchPostsList(debouncedKeyword));
-  // }, [debouncedKeyword, history, dispatch, keyword]);
+  useEffect(() => {
+    if (debouncedKeyword) {
+      dispatch(fetchPostsList(debouncedKeyword));
+    }
+  }, [debouncedKeyword, dispatch]);
 
   const renderedPosts = posts.map((post) => {
     return <Post key={post._id} post={post} />;
@@ -50,8 +50,11 @@ const SearchScreen = ({ history, match }) => {
           {keyword.replace(/ /g, '\u00a0')}
         </InputHighlight>
       </InputWrapper>
+      {!posts.length && (
+        <HeaderTextCenter>No posts found with the given name</HeaderTextCenter>
+      )}
       <StyledHomeScreen>
-        {loading && <Loader style={{ fontSize: '80px' }} />}
+        <div>{loading && <Loader style={{ fontSize: '80px' }} />}</div>
         {error && <ErrorAlert error={error} />}
         <Container>{renderedPosts}</Container>
       </StyledHomeScreen>
