@@ -31,6 +31,7 @@ const LoginScreen = ({ history }) => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    setErrors({});
     setFormValues({ ...formValues, [name]: value });
   };
 
