@@ -7,7 +7,24 @@ import generateToken from '../utils/generatetoken.js';
 //@access public
 
 const authUser = asyncHandler(async (req, res) => {
-  //   const { email, password } = req.body;
+  const { email, password } = req.body;
+  // const email = 'admin@example.com';
+  // const password = '123456';
+  const user = await User.findOne({ email });
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password');
+  }
+});
+const loginDemo = asyncHandler(async (req, res) => {
   const email = 'admin@example.com';
   const password = '123456';
   const user = await User.findOne({ email });
@@ -25,4 +42,4 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+export { authUser, loginDemo };

@@ -11,10 +11,10 @@ export const loginDemo = () => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST });
     const config = {
       headers: {
-        'Content-Type': 'application-json',
+        'Content-Type': 'application/json',
       },
     };
-    const { data } = await axios.post('/api/users/login', config);
+    const { data } = await axios.post('/api/users/logindemo', config);
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -32,10 +32,10 @@ export const login = (formValues) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST });
     const config = {
       headers: {
-        'Content-Type': 'application-json',
+        'Content-Type': 'application/json',
       },
     };
-    const { data } = await axios.post('/api/users/login', config, formValues);
+    const { data } = await axios.post('/api/users/login', formValues, config);
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {

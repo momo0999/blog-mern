@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginDemo, login } from '../../actions/userActions';
+import { validateLogin } from '../../validate';
 import {
   Form,
   WrapperLabelInput,
@@ -10,10 +11,12 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+  SmallValidator,
 } from '../../utils/utilsStyles.styled';
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
+  const [errors, setErrors] = useState({});
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -33,6 +36,7 @@ const LoginScreen = ({ history }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setErrors(validateLogin(formValues));
     dispatch(login(formValues));
   };
 
@@ -50,20 +54,26 @@ const LoginScreen = ({ history }) => {
           <WrapperLabelInput>
             <Label>Email</Label>
             <Input
+              style={errors.email && { borderColor: 'red' }}
               name='email'
               type='email'
               value={email}
               onChange={handleOnChange}
             />
+            {errors.email && <SmallValidator>{errors.email}</SmallValidator>}
           </WrapperLabelInput>
           <WrapperLabelInput>
             <Label>Password</Label>
             <Input
+              style={errors.password && { borderColor: 'red' }}
               name='password'
               type='password'
               value={password}
               onChange={handleOnChange}
             />
+            {errors.password && (
+              <SmallValidator>{errors.password}</SmallValidator>
+            )}
           </WrapperLabelInput>
           <WrapperLabelInput>
             <Button type='submit'>Login</Button>
