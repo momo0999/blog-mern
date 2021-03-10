@@ -18,6 +18,7 @@ const SearchScreen = ({ history, match }) => {
   const { posts, error, loading } = useSelector((state) => state.postList);
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
+
   useEffect(() => {
     timer.current = setTimeout(() => {
       setDebouncedKeyword(keyword);
@@ -30,7 +31,7 @@ const SearchScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (debouncedKeyword) {
-      history.push(`/search/${keyword}`);
+      history.push(`/search/${debouncedKeyword}`);
       dispatch(fetchPostsList(debouncedKeyword));
     } else {
       history.push('/search');
