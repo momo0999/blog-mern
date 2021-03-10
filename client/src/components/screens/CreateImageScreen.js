@@ -10,6 +10,8 @@ import {
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
+  CancelLink,
+  ButtonWrapper,
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
@@ -86,7 +88,10 @@ const CreateImageScreen = ({ history }) => {
               />
             </WrapperLabelInput>
             <WrapperLabelInput>
-              <Button type='submit'>Submit</Button>
+              <ButtonWrapper>
+                <Button type='submit'>Submit</Button>
+                <CancelLink to='/dashboard'>Cancel</CancelLink>
+              </ButtonWrapper>
             </WrapperLabelInput>
           </Form>
         )}

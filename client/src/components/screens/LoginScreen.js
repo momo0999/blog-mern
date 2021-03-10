@@ -10,6 +10,7 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+  ButtonWrapper,
 } from '../../utils/utilsStyles.styled';
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -66,10 +67,10 @@ const LoginScreen = ({ history }) => {
             />
           </WrapperLabelInput>
           <WrapperLabelInput>
-            <Button type='submit'>Login</Button>
-          </WrapperLabelInput>
-          <WrapperLabelInput>
-            <Button onClick={handleDemoLogin}>Demo Login</Button>
+            <ButtonWrapper>
+              <Button type='submit'>Login</Button>
+              <Button onClick={handleDemoLogin}>Demo Login</Button>
+            </ButtonWrapper>
           </WrapperLabelInput>
         </Form>
       </StyledHomeScreen>

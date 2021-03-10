@@ -66,6 +66,10 @@ export const RowWrapper = styled.div`
   margin: 20px;
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
+
 export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -293,10 +297,23 @@ export const Button = styled.button`
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  font-size: 17px;
+  margin-right: 10px;
   color: ${({ theme }) => theme.primaryLight};
   background-color: ${({ theme }) => theme.primaryDark};
   padding: 12px 30px;
   transition: opacity 0.2s ease-in;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+export const CancelLink = styled(Link)`
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 3px;
+  font-size: 17px;
+  background-color: ${({ theme }) => theme.lightGrey};
+  color: ${({ theme }) => theme.primaryDark};
   &:hover {
     opacity: 0.8;
   }
