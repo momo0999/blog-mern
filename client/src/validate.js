@@ -30,3 +30,14 @@ export const validateCreatePost = (formValues) => {
   }
   return errors;
 };
+
+export const validateCreateImage = (formValues) => {
+  let errors = {};
+  if (!formValues.category) {
+    errors.category = 'Category is required';
+  }
+  if (!formValues.img) {
+    errors.img = 'Image is required';
+  }
+  return errors;
+};

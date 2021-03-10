@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, Fragment } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { createImage } from '../../actions/imageActions';
+import { validateCreateImage } from '../../validate';
 import {
   Form,
   WrapperLabelInput,
@@ -12,6 +13,7 @@ import {
   PageTitleWrapper,
   PageTitle,
   Loader,
+  SmallValidator,
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
@@ -19,6 +21,7 @@ const CreateImageScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.imageCreate);
   const { userInfo } = useSelector((state) => state.userLogin);
+  const [errors, setErrors] = useState({});
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -33,6 +36,11 @@ const CreateImageScreen = ({ history }) => {
       history.push('/');
     }
     if (success) {
+      setFormValues({
+        title: '',
+        category: '',
+        img: '',
+      });
       setShowSuccessTab(true);
       timer.current = setTimeout(() => {
         setShowSuccessTab(false);
@@ -46,6 +54,7 @@ const CreateImageScreen = ({ history }) => {
   }, [success, history, userInfo]);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    setErrors({});
     setFormValues({ ...formValues, [name]: value });
   };
   const uploadFileHandler = async (e) => {
@@ -69,13 +78,8 @@ const CreateImageScreen = ({ history }) => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setErrors(validateCreateImage(formValues));
     dispatch(createImage(formValues));
-    setFormValues({
-      title: '',
-      category: '',
-      img: '',
-      content: '',
-    });
   };
 
   return (
@@ -91,11 +95,13 @@ const CreateImageScreen = ({ history }) => {
             <WrapperLabelInput>
               <Label>Image</Label>
               <Input
+                style={errors.img && { borderColor: 'red' }}
                 value={img}
                 onChange={handleOnChange}
                 name='img'
                 placeholder='Image URL'
               />
+              {errors.img && <SmallValidator>{errors.img}</SmallValidator>}
               <Input
                 type='file'
                 onChange={uploadFileHandler}
@@ -107,11 +113,15 @@ const CreateImageScreen = ({ history }) => {
             <WrapperLabelInput>
               <Label>Category</Label>
               <Input
+                style={errors.category && { borderColor: 'red' }}
                 onChange={handleOnChange}
                 name='category'
                 placeholder='Enter your category'
                 value={category}
               />
+              {errors.category && (
+                <SmallValidator>{errors.category}</SmallValidator>
+              )}
             </WrapperLabelInput>
             <WrapperLabelInput>
               <Button type='submit'>Submit</Button>
