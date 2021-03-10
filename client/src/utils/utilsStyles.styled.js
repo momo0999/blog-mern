@@ -22,6 +22,11 @@ export const HeaderTextCenter = styled.h1`
   text-align: center;
 `;
 
+export const SmallValidator = styled.small`
+  color: red;
+  margin: 10px;
+`;
+
 export const CategoryLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.darkGrey};
