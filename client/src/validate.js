@@ -13,3 +13,20 @@ export const validateLogin = (formValues) => {
   }
   return errors;
 };
+
+export const validateCreatePost = (formValues) => {
+  let errors = {};
+  if (!formValues.title) {
+    errors.title = 'Title is required';
+  }
+  if (!formValues.category) {
+    errors.category = 'Category is required';
+  }
+  if (!formValues.img) {
+    errors.img = 'Image is required';
+  }
+  if (!formValues.content) {
+    errors.content = 'Content is required';
+  }
+  return errors;
+};

@@ -24,6 +24,7 @@ export const HeaderTextCenter = styled.h1`
 
 export const SmallValidator = styled.small`
   color: red;
+  margin: 10px;
 `;
 
 export const CategoryLink = styled(Link)`

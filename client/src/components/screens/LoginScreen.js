@@ -13,9 +13,12 @@ import {
   PageTitleWrapper,
   SmallValidator,
 } from '../../utils/utilsStyles.styled';
+import ErrorAlert from '../ErrorAlert';
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.userLogin);
+  const { userInfo, error: userInfoError } = useSelector(
+    (state) => state.userLogin
+  );
   const [errors, setErrors] = useState({});
   const [formValues, setFormValues] = useState({
     email: '',
@@ -49,6 +52,7 @@ const LoginScreen = ({ history }) => {
     <Fragment>
       <StyledHomeScreen>
         <Form onSubmit={handleOnSubmit}>
+          {userInfoError && <ErrorAlert error={userInfoError} />}
           <PageTitleWrapper>
             <PageTitle>Sign In</PageTitle>
           </PageTitleWrapper>
