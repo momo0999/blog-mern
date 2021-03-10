@@ -18,6 +18,7 @@ const SearchScreen = ({ history, match }) => {
   const { posts, error, loading } = useSelector((state) => state.postList);
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
+
   useEffect(() => {
     timer.current = setTimeout(() => {
       setDebouncedKeyword(keyword);
@@ -30,9 +31,12 @@ const SearchScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (debouncedKeyword) {
+      history.push(`/search/${debouncedKeyword}`);
       dispatch(fetchPostsList(debouncedKeyword));
+    } else {
+      history.push('/search');
     }
-  }, [debouncedKeyword, dispatch]);
+  }, [debouncedKeyword, dispatch, history]);
 
   const renderedPosts = posts.map((post) => {
     return <Post key={post._id} post={post} />;
@@ -50,9 +54,7 @@ const SearchScreen = ({ history, match }) => {
           {keyword.replace(/ /g, '\u00a0')}
         </InputHighlight>
       </InputWrapper>
-      {!posts.length && (
-        <HeaderTextCenter>No posts found with the given name</HeaderTextCenter>
-      )}
+      {!posts.length && <HeaderTextCenter>No blogs found</HeaderTextCenter>}
       <StyledHomeScreen>
         <div>{loading && <Loader style={{ fontSize: '80px' }} />}</div>
         {error && <ErrorAlert error={error} />}

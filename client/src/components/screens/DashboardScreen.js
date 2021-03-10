@@ -29,7 +29,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import ErrorAlert from '../ErrorAlert';
 
-const DashboardScreen = ({ history, match }) => {
+const DashboardScreen = ({ history }) => {
   const dispatch = useDispatch();
   const timer = useRef();
   const { images, loading: loadingImages, error: errorImages } = useSelector(
@@ -156,6 +156,7 @@ const DashboardScreen = ({ history, match }) => {
               title='Delete Blog'
               content='Are you sure you want to delete this blog?'
               actions={renderActions}
+              onDismiss={() => setPostDelete(false)}
             />
           )}
           {imageDelete && (
@@ -163,6 +164,7 @@ const DashboardScreen = ({ history, match }) => {
               title='Delete Image'
               content='Are you sure you want to delete this Image?'
               actions={renderImageActions}
+              onDismiss={() => setImageDelete(false)}
             />
           )}
           {showSuccessDeletePostTab && <SuccessAlert message='Post Deleted!' />}
