@@ -17,6 +17,16 @@ export const Loader = styled(LoopIcon)`
   animation: ${rotateInfinite} 2s linear infinite;
 `;
 
+export const HeaderTextCenter = styled.h1`
+  margin: 15px;
+  text-align: center;
+`;
+
+export const SmallValidator = styled.small`
+  color: red;
+  margin: 10px;
+`;
+
 export const CategoryLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.darkGrey};

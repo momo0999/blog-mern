@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 export const StyledNavbar = styled.div`
   display: flex;
@@ -104,7 +105,7 @@ export const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   }
 `;
 
-export const StyledAccountCircleIcon = styled(AccountCircleIcon)`
+export const StyledDashboard = styled(DashboardIcon)`
   color: ${({ theme }) => theme.primaryFontColor};
   vertical-align: middle;
 

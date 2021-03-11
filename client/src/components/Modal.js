@@ -7,10 +7,10 @@ import {
   Text,
   ModalTitle,
 } from '../utils/utilsStyles.styled';
-const Modal = ({ title, content, actions }) => {
+const Modal = ({ title, content, actions, onDismiss }) => {
   return ReactDOM.createPortal(
-    <ModalWindow>
-      <ModalContainer>
+    <ModalWindow onClick={onDismiss}>
+      <ModalContainer onClick={(e) => e.stopPropagation()}>
         <ModalTitle>{title}</ModalTitle>
         <Text>{content}</Text>
         <ModalButtonWrapper>{actions}</ModalButtonWrapper>
