@@ -2,12 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteImage } from '../../actions/imageActions';
 import { IMAGE_DELETE_RESET } from '../../actions/types';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  PrimaryLink,
-  DangerButton,
-} from '../../utils/utilsStyles.styled';
+import { PrimaryLink, DangerButton } from '../../utils/utilsStyles.styled';
 import Modal from '../Modal';
 
 const DeleteImageScreen = ({ match, history }) => {
