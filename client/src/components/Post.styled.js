@@ -12,6 +12,7 @@ export const Img = styled.img`
   width: 100%;
   max-height: 200px;
   border-radius: 3px;
+  object-fit: cover;
 `;
 
 export const Paragraph = styled.p`

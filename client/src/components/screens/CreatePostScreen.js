@@ -13,8 +13,13 @@ import {
   StyledHomeScreen,
   PageTitleWrapper,
   PageTitle,
+
+  CancelLink,
+  ButtonWrapper,
+
   Loader,
   SmallValidator,
+
 } from '../../utils/utilsStyles.styled';
 import SuccessAlert from '../SuccessAlert';
 
@@ -155,7 +160,10 @@ const CreatePostScreen = ({ history }) => {
               )}
             </WrapperLabelInput>
             <WrapperLabelInput>
-              <Button type='submit'>Submit</Button>
+              <ButtonWrapper>
+                <Button type='submit'>Submit</Button>
+                <CancelLink to='/dashboard'>Cancel</CancelLink>
+              </ButtonWrapper>
             </WrapperLabelInput>
           </Form>
         )}

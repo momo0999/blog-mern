@@ -11,7 +11,11 @@ import {
   StyledHomeScreen,
   PageTitle,
   PageTitleWrapper,
+
+  ButtonWrapper,
+
   SmallValidator,
+
 } from '../../utils/utilsStyles.styled';
 import ErrorAlert from '../ErrorAlert';
 const LoginScreen = ({ history }) => {
@@ -81,10 +85,10 @@ const LoginScreen = ({ history }) => {
             )}
           </WrapperLabelInput>
           <WrapperLabelInput>
-            <Button type='submit'>Login</Button>
-          </WrapperLabelInput>
-          <WrapperLabelInput>
-            <Button onClick={handleDemoLogin}>Demo Login</Button>
+            <ButtonWrapper>
+              <Button type='submit'>Login</Button>
+              <Button onClick={handleDemoLogin}>Demo Login</Button>
+            </ButtonWrapper>
           </WrapperLabelInput>
         </Form>
       </StyledHomeScreen>
