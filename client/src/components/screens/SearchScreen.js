@@ -5,7 +5,6 @@ import Post from '../Post';
 import {
   StyledHomeScreen,
   InputWrapper,
-  InputHighlight,
   SearchInput,
   Container,
   Loader,
@@ -50,9 +49,6 @@ const SearchScreen = ({ history, match }) => {
           placeholder='Search...'
           spellCheck={false}
         />
-        <InputHighlight className='input-highlight'>
-          {keyword.replace(/ /g, '\u00a0')}
-        </InputHighlight>
       </InputWrapper>
       {!posts.length && <HeaderTextCenter>No blogs found</HeaderTextCenter>}
       <StyledHomeScreen>

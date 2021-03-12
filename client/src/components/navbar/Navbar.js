@@ -60,7 +60,7 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
             </StyledLink>
           </li>
           <li>
-            <StyledLink to='/photography'>Photogrphy</StyledLink>
+            <StyledLink to='/photography'>Photography</StyledLink>
           </li>
           <li>
             {userInfo ? (
