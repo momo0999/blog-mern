@@ -17,13 +17,14 @@ import {
 const PostScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const {
-    post: { title, img, content, category },
+    post: { title, img, content, category, _id },
     loading,
     error,
   } = useSelector((state) => state.postDetail);
   useEffect(() => {
-    dispatch(fetchPostDetail(match.params.id));
-  }, [dispatch, match]);
+    if (!_id || _id !== match.params.id)
+      dispatch(fetchPostDetail(match.params.id));
+  }, [dispatch, match, _id]);
 
   return (
     <Fragment>
