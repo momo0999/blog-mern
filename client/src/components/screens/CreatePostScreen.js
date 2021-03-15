@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost } from '../../actions/postActions';
+import { createPost, fetchPosts } from '../../actions/postActions';
 import { validateCreatePost } from '../../validate';
 import {
   Form,
@@ -86,10 +86,11 @@ const CreatePostScreen = ({ history }) => {
     }
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validateCreatePost(formValues));
-    dispatch(createPost(formValues));
+    await dispatch(createPost(formValues));
+    dispatch(fetchPosts());
   };
   return (
     <Fragment>

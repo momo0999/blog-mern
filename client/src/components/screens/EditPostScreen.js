@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editPost } from '../../actions/postActions';
+import { editPost, fetchPosts } from '../../actions/postActions';
 import {
   Form,
   WrapperLabelInput,
@@ -51,6 +51,12 @@ const EditPostScreen = ({ history }) => {
       }
     };
   }, [dispatch, history, userInfo, success]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(fetchPosts());
+    }
+  }, [success]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];

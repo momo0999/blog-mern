@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { createImage } from '../../actions/imageActions';
+import { createImage, fetchImages } from '../../actions/imageActions';
 import { validateCreateImage } from '../../validate';
 import {
   Form,
@@ -76,10 +76,11 @@ const CreateImageScreen = ({ history }) => {
       setUploading(false);
     }
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validateCreateImage(formValues));
-    dispatch(createImage(formValues));
+    await dispatch(createImage(formValues));
+    dispatch(fetchImages());
   };
 
   return (

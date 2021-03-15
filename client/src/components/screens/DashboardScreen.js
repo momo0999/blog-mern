@@ -5,8 +5,13 @@ import {
   fetchPostsList,
   deletePost,
   fetchPostDetail,
+  fetchPosts,
 } from '../../actions/postActions';
-import { getImages, deleteImage } from '../../actions/imageActions';
+import {
+  getImages,
+  deleteImage,
+  fetchImages,
+} from '../../actions/imageActions';
 import {
   Td,
   Table,
@@ -92,6 +97,7 @@ const DashboardScreen = ({ history }) => {
 
   const handleOnDeleteModal = async (id) => {
     await dispatch(deletePost(id));
+    dispatch(fetchPosts());
     setPostDelete(false);
     history.push('/dashboard');
     dispatch(fetchPostsList());
@@ -99,6 +105,7 @@ const DashboardScreen = ({ history }) => {
   };
   const handleOnDeleteImageModal = async (id) => {
     await dispatch(deleteImage(id));
+    dispatch(fetchImages());
     setImageDelete(false);
     history.push('/dashboard');
     dispatch(getImages());

@@ -13,7 +13,6 @@ import {
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
   POST_CREATE_FAIL,
-  POST_CREATE_RESET,
   POST_DELETE_REQUEST,
   POST_DELETE_SUCCESS,
   POST_DELETE_FAIL,
@@ -23,7 +22,28 @@ import {
   POST_EDIT_RESET,
 } from './types';
 
-export const fetchPostsList = () => async (dispatch) => {
+export const fetchPostsList = () => async (dispatch, getState) => {
+  const {
+    postList: { posts },
+  } = getState();
+  if (posts.length) {
+    return;
+  }
+  try {
+    dispatch({ type: POST_LIST_REQUEST });
+    const { data } = await axios.get(`/api/posts`);
+    dispatch({ type: POST_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: POST_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const fetchPosts = () => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
     const { data } = await axios.get(`/api/posts`);
@@ -106,7 +126,6 @@ export const createPost = (formValues) => async (dispatch, getState) => {
     };
     const { data } = await axios.post('/api/posts', formValues, config);
     dispatch({ type: POST_CREATE_SUCCESS, payload: data });
-    dispatch({ type: POST_CREATE_RESET });
   } catch (error) {
     dispatch({
       type: POST_CREATE_FAIL,
