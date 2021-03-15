@@ -20,6 +20,9 @@ import {
   POST_EDIT_SUCCESS,
   POST_EDIT_FAIL,
   POST_EDIT_RESET,
+  POST_SEARCH_REQUEST,
+  POST_SEARCH_SUCCESS,
+  POST_SEARCH_FAIL,
 } from './types';
 
 export const fetchPostsList = () => async (dispatch, getState) => {
@@ -43,7 +46,7 @@ export const fetchPostsList = () => async (dispatch, getState) => {
     });
   }
 };
-export const fetchPosts = () => async (dispatch) => {
+export const updatePosts = () => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
     const { data } = await axios.get(`/api/posts`);
@@ -60,12 +63,14 @@ export const fetchPosts = () => async (dispatch) => {
 };
 export const fetchPostsSearch = (debouncedKeyword = '') => async (dispatch) => {
   try {
-    dispatch({ type: POST_LIST_REQUEST });
-    const { data } = await axios.get(`/api/posts?keyword=${debouncedKeyword}`);
-    dispatch({ type: POST_LIST_SUCCESS, payload: data });
+    dispatch({ type: POST_SEARCH_REQUEST });
+    const { data } = await axios.get(
+      `/api/posts/search?keyword=${debouncedKeyword}`
+    );
+    dispatch({ type: POST_SEARCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type: POST_LIST_FAIL,
+      type: POST_SEARCH_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

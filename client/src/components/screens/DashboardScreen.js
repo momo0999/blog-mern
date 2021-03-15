@@ -5,7 +5,7 @@ import {
   fetchPostsList,
   deletePost,
   fetchPostDetail,
-  fetchPosts,
+  updatePosts,
 } from '../../actions/postActions';
 import {
   getImages,
@@ -97,10 +97,9 @@ const DashboardScreen = ({ history }) => {
 
   const handleOnDeleteModal = async (id) => {
     await dispatch(deletePost(id));
-    dispatch(fetchPosts());
     setPostDelete(false);
     history.push('/dashboard');
-    dispatch(fetchPostsList());
+    dispatch(updatePosts());
     dispatch({ type: POST_DELETE_RESET });
   };
   const handleOnDeleteImageModal = async (id) => {

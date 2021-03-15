@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost, fetchPosts } from '../../actions/postActions';
+import { createPost, updatePosts } from '../../actions/postActions';
 import { validateCreatePost } from '../../validate';
 import {
   Form,
@@ -90,7 +90,7 @@ const CreatePostScreen = ({ history }) => {
     e.preventDefault();
     setErrors(validateCreatePost(formValues));
     await dispatch(createPost(formValues));
-    dispatch(fetchPosts());
+    dispatch(updatePosts());
   };
   return (
     <Fragment>

@@ -4,17 +4,32 @@ import asyncHandler from 'express-async-handler';
 // @route  /api/posts
 // @desc   Get posts
 // @access Public
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-const getPosts = asyncHandler(async (req, res) => {
+const getPostsSearch = asyncHandler(async (req, res) => {
+  const r = new RegExp(`(${escapeRegex(req.query.keyword)})`);
+
   const keyword = req.query.keyword
     ? {
         title: {
-          $regex: req.query.keyword,
-          $options: 'i',
+          $regex: r,
+          $options: 'mi',
         },
       }
     : {};
   const posts = await Post.find({ ...keyword });
+  if (posts) {
+    res.json(posts);
+  } else {
+    res.status(404);
+    throw new Error('Posts not found');
+  }
+});
+
+const getPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find({});
   if (posts) {
     res.json(posts);
   } else {
@@ -105,6 +120,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
 export {
   getPosts,
+  getPostsSearch,
   getPostById,
   getPostsByCategory,
   createPost,

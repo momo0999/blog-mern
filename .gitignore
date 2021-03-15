@@ -7,7 +7,7 @@ node_modules/
 .pnp.js
 /client/.eslintcache
 /client/build
-data
+
 
 
 # testing

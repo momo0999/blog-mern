@@ -14,7 +14,7 @@ import ErrorAlert from '../ErrorAlert';
 const SearchScreen = ({ history }) => {
   const dispatch = useDispatch();
   const timer = useRef();
-  const { posts, error, loading } = useSelector((state) => state.postList);
+  const { posts, error, loading } = useSelector((state) => state.postSearch);
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
 
@@ -42,7 +42,7 @@ const SearchScreen = ({ history }) => {
       return <Post key={post._id} post={post} />;
     });
   };
-  if (!posts) return null;
+
   return (
     <Fragment>
       <InputWrapper>
