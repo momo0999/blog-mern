@@ -225,13 +225,13 @@ const DashboardScreen = ({ history }) => {
             <Table>
               <tbody>
                 <Tr>
-                  <Th>ID</Th>
+                  <Th>Title</Th>
                   <Th>Delete</Th>
                 </Tr>
                 {images.map((image) => {
                   return (
                     <Tr key={image._id}>
-                      <Td>{image._id}</Td>
+                      <Td>{image.title}</Td>
                       <Td>
                         <IconButtonLarge
                           onClick={() => handleDeleteImage(image._id)}

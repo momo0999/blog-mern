@@ -25,10 +25,11 @@ const CreateImageScreen = ({ history }) => {
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [formValues, setFormValues] = useState({
+    title: '',
     img: '',
     category: '',
   });
-  const { img, category } = formValues;
+  const { img, category, title } = formValues;
   const timer = useRef();
 
   useEffect(() => {
@@ -94,6 +95,17 @@ const CreateImageScreen = ({ history }) => {
           <Form onSubmit={handleOnSubmit}>
             {showSuccessTab && <SuccessAlert message='Image Created!' />}
             <WrapperLabelInput>
+              <Label>Title</Label>
+              <Input
+                style={errors.title && { borderColor: 'red' }}
+                onChange={handleOnChange}
+                name='title'
+                placeholder='Enter a title'
+                value={title}
+              />
+              {errors.title && <SmallValidator>{errors.title}</SmallValidator>}
+            </WrapperLabelInput>
+            <WrapperLabelInput>
               <Label>Image</Label>
               <Input
                 style={errors.img && { borderColor: 'red' }}
@@ -117,7 +129,7 @@ const CreateImageScreen = ({ history }) => {
                 style={errors.category && { borderColor: 'red' }}
                 onChange={handleOnChange}
                 name='category'
-                placeholder='Enter your category'
+                placeholder='Enter a category'
                 value={category}
               />
               {errors.category && (

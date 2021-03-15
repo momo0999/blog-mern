@@ -33,6 +33,9 @@ export const validateCreatePost = (formValues) => {
 
 export const validateCreateImage = (formValues) => {
   let errors = {};
+  if (!formValues.title) {
+    errors.title = 'Title is required';
+  }
   if (!formValues.category) {
     errors.category = 'Category is required';
   }

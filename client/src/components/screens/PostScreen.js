@@ -17,7 +17,7 @@ import {
 const PostScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const {
-    post: { title, img, content, category, _id },
+    post: { title, img, content, category },
     loading,
     error,
   } = useSelector((state) => state.postDetail);
