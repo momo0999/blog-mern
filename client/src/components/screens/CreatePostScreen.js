@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePosts } from '../../actions/postActions';
 import { validateCreatePost } from '../../validate';
+import { POST_CREATE_RESET } from '../../actions/types';
 import {
   Form,
   WrapperLabelInput,
@@ -55,6 +56,7 @@ const CreatePostScreen = ({ history }) => {
         content: '',
       });
       setShowSuccessTab(true);
+      dispatch({ type: POST_CREATE_RESET });
       timer.current = setTimeout(() => {
         setShowSuccessTab(false);
       }, 3000);
@@ -64,7 +66,7 @@ const CreatePostScreen = ({ history }) => {
         clearTimeout(timer.current);
       }
     };
-  }, [success, history, userInfo]);
+  }, [success, history, userInfo, dispatch]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -96,11 +98,11 @@ const CreatePostScreen = ({ history }) => {
     <Fragment>
       <PageTitleWrapper>
         <PageTitle>Create a new blog</PageTitle>
-        {showSuccessTab && <SuccessAlert message='Post Created!' />}
       </PageTitleWrapper>
       <StyledHomeScreen>
         {userInfo && userInfo.isAdmin && (
           <Form onSubmit={handleOnSubmit}>
+            {showSuccessTab && <SuccessAlert message='Post Created!' />}
             <WrapperLabelInput>
               <Label>Title</Label>
               <Input
