@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostsList } from '../../actions/postActions';
+import { fetchPostsSearch } from '../../actions/postActions';
 import Post from '../Post';
 import {
   StyledHomeScreen,
@@ -31,7 +31,7 @@ const SearchScreen = ({ history }) => {
   useEffect(() => {
     if (debouncedKeyword) {
       history.push(`/search/${debouncedKeyword}`);
-      dispatch(fetchPostsList(debouncedKeyword));
+      dispatch(fetchPostsSearch(debouncedKeyword));
     } else {
       history.push('/search');
     }

@@ -23,7 +23,22 @@ import {
   POST_EDIT_RESET,
 } from './types';
 
-export const fetchPostsList = (debouncedKeyword = '') => async (dispatch) => {
+export const fetchPostsList = () => async (dispatch) => {
+  try {
+    dispatch({ type: POST_LIST_REQUEST });
+    const { data } = await axios.get(`/api/posts`);
+    dispatch({ type: POST_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: POST_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const fetchPostsSearch = (debouncedKeyword = '') => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
     const { data } = await axios.get(`/api/posts?keyword=${debouncedKeyword}`);
