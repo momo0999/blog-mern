@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { createImage } from '../../actions/imageActions';
+import { createImage, fetchImages } from '../../actions/imageActions';
 import { validateCreateImage } from '../../validate';
 import {
   Form,
@@ -30,10 +30,11 @@ const CreateImageScreen = ({ history }) => {
   const [showSuccessTab, setShowSuccessTab] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [formValues, setFormValues] = useState({
+    title: '',
     img: '',
     category: '',
   });
-  const { img, category } = formValues;
+  const { img, category, title } = formValues;
   const timer = useRef();
 
   useEffect(() => {
@@ -81,10 +82,11 @@ const CreateImageScreen = ({ history }) => {
       setUploading(false);
     }
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrors(validateCreateImage(formValues));
-    dispatch(createImage(formValues));
+    await dispatch(createImage(formValues));
+    dispatch(fetchImages());
   };
 
   return (
@@ -97,6 +99,17 @@ const CreateImageScreen = ({ history }) => {
         {userInfo && userInfo.isAdmin && (
           <Form onSubmit={handleOnSubmit}>
             {showSuccessTab && <SuccessAlert message='Image Created!' />}
+            <WrapperLabelInput>
+              <Label>Title</Label>
+              <Input
+                style={errors.title && { borderColor: 'red' }}
+                onChange={handleOnChange}
+                name='title'
+                placeholder='Enter a title'
+                value={title}
+              />
+              {errors.title && <SmallValidator>{errors.title}</SmallValidator>}
+            </WrapperLabelInput>
             <WrapperLabelInput>
               <Label>Image</Label>
               <Input
@@ -121,7 +134,7 @@ const CreateImageScreen = ({ history }) => {
                 style={errors.category && { borderColor: 'red' }}
                 onChange={handleOnChange}
                 name='category'
-                placeholder='Enter your category'
+                placeholder='Enter a category'
                 value={category}
               />
               {errors.category && (

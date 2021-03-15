@@ -6,6 +6,7 @@ import {
   postCreateReducer,
   postDeleteReducer,
   postEditReducer,
+  postSearchReducer,
 } from './postReducers';
 import {
   imageListReducer,
@@ -18,6 +19,7 @@ import { userLoginReducer } from './userReducer';
 
 export default combineReducers({
   postList: postListReducer,
+  postSearch: postSearchReducer,
   postDetail: postDetailReducer,
   postCategory: postCategoryReducer,
   imageList: imageListReducer,

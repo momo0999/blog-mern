@@ -431,40 +431,23 @@ export const InputWrapper = styled.div`
   flex-items: center;
   jusitify-content: center;
 `;
-export const InputHighlight = styled.span`
-  font-size: 30px;
-  user-select: none;
-  line-height: 70px;
-  border-top: 3px solid white;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  max-width: 100%;
-  height: 0;
-  color: transparent;
-  overflow: hidden;
-`;
-export const SearchInput = styled.input`
-height: 60px;
-width: 50%;
-border-radius: 0;
-line-height: 70px;
-letter-spacing: 2px;
-background-color: transparent;
-color: #333;
-font-size: 30px;
-border: none;
-outline: none;
-margin: 10px auto;
-border-bottom: 3px solid #333333;
-@media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
-  max-width: 80%;
-  margin: 10px auto;
-  font-size: 25px;
-}
 
-&:focus {
-   ${InputHighlight} {
-    border-top: 3px solid #fbc91b;
+export const SearchInput = styled.input`
+  height: 60px;
+  width: 50%;
+  border-radius: 0;
+  line-height: 70px;
+  letter-spacing: 2px;
+  background-color: transparent;
+  color: #333;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  margin: 10px auto;
+  border-bottom: 3px solid #333333;
+  @media (max-width: ${({ theme }) => theme.mobileThirdShowCase}) {
+    max-width: 80%;
+    margin: 10px auto;
+    font-size: 25px;
   }
 `;

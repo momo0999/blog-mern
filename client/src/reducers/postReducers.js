@@ -20,6 +20,9 @@ import {
   POST_EDIT_SUCCESS,
   POST_EDIT_FAIL,
   POST_EDIT_RESET,
+  POST_SEARCH_REQUEST,
+  POST_SEARCH_SUCCESS,
+  POST_SEARCH_FAIL,
 } from '../actions/types';
 
 export const postListReducer = (state = { posts: [] }, action) => {
@@ -27,8 +30,28 @@ export const postListReducer = (state = { posts: [] }, action) => {
     case POST_LIST_REQUEST:
       return { loading: true, posts: [] };
     case POST_LIST_SUCCESS:
-      return { loading: false, posts: action.payload };
+      return {
+        ...state,
+        loading: false,
+        posts: [...state.posts, ...action.payload],
+      };
     case POST_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+export const postSearchReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case POST_SEARCH_REQUEST:
+      return { loading: true, posts: [] };
+    case POST_SEARCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        posts: [...state.posts, ...action.payload],
+      };
+    case POST_SEARCH_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

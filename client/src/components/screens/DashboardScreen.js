@@ -5,8 +5,13 @@ import {
   fetchPostsList,
   deletePost,
   fetchPostDetail,
+  updatePosts,
 } from '../../actions/postActions';
-import { getImages, deleteImage } from '../../actions/imageActions';
+import {
+  getImages,
+  deleteImage,
+  fetchImages,
+} from '../../actions/imageActions';
 import {
   Td,
   Table,
@@ -94,11 +99,12 @@ const DashboardScreen = ({ history }) => {
     await dispatch(deletePost(id));
     setPostDelete(false);
     history.push('/dashboard');
-    dispatch(fetchPostsList());
+    dispatch(updatePosts());
     dispatch({ type: POST_DELETE_RESET });
   };
   const handleOnDeleteImageModal = async (id) => {
     await dispatch(deleteImage(id));
+    dispatch(fetchImages());
     setImageDelete(false);
     history.push('/dashboard');
     dispatch(getImages());
@@ -219,13 +225,13 @@ const DashboardScreen = ({ history }) => {
             <Table>
               <tbody>
                 <Tr>
-                  <Th>ID</Th>
+                  <Th>Title</Th>
                   <Th>Delete</Th>
                 </Tr>
                 {images.map((image) => {
                   return (
                     <Tr key={image._id}>
-                      <Td>{image._id}</Td>
+                      <Td>{image.title}</Td>
                       <Td>
                         <IconButtonLarge
                           onClick={() => handleDeleteImage(image._id)}

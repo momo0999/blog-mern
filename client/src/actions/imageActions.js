@@ -13,10 +13,30 @@ import {
   IMAGE_DELETE_REQUEST,
   IMAGE_DELETE_SUCCESS,
   IMAGE_DELETE_FAIL,
-  IMAGE_DELETE_RESET,
 } from './types';
 
-export const getImages = () => async (dispatch) => {
+export const getImages = () => async (dispatch, getState) => {
+  const {
+    imageList: { images },
+  } = getState();
+  if (images.length) {
+    return;
+  }
+  try {
+    dispatch({ type: IMAGE_LIST_REQUEST });
+    const { data } = await axios.get(`/api/images`);
+    dispatch({ type: IMAGE_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: IMAGE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const fetchImages = () => async (dispatch) => {
   try {
     dispatch({ type: IMAGE_LIST_REQUEST });
     const { data } = await axios.get(`/api/images`);

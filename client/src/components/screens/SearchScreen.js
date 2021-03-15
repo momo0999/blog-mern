@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostsList } from '../../actions/postActions';
+import { fetchPostsSearch } from '../../actions/postActions';
 import Post from '../Post';
 import {
   StyledHomeScreen,
@@ -11,10 +11,10 @@ import {
   HeaderTextCenter,
 } from '../../utils/utilsStyles.styled';
 import ErrorAlert from '../ErrorAlert';
-const SearchScreen = ({ history, match }) => {
+const SearchScreen = ({ history }) => {
   const dispatch = useDispatch();
   const timer = useRef();
-  const { posts, error, loading } = useSelector((state) => state.postList);
+  const { posts, error, loading } = useSelector((state) => state.postSearch);
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
 
@@ -31,15 +31,18 @@ const SearchScreen = ({ history, match }) => {
   useEffect(() => {
     if (debouncedKeyword) {
       history.push(`/search/${debouncedKeyword}`);
-      dispatch(fetchPostsList(debouncedKeyword));
+      dispatch(fetchPostsSearch(debouncedKeyword));
     } else {
       history.push('/search');
     }
   }, [debouncedKeyword, dispatch, history]);
 
-  const renderedPosts = posts.map((post) => {
-    return <Post key={post._id} post={post} />;
-  });
+  const renderedPosts = () => {
+    return posts.map((post) => {
+      return <Post key={post._id} post={post} />;
+    });
+  };
+
   return (
     <Fragment>
       <InputWrapper>
@@ -50,11 +53,11 @@ const SearchScreen = ({ history, match }) => {
           spellCheck={false}
         />
       </InputWrapper>
-      {!posts.length && <HeaderTextCenter>No blogs found</HeaderTextCenter>}
+      {!posts && <HeaderTextCenter>No blogs found</HeaderTextCenter>}
       <StyledHomeScreen>
         <div>{loading && <Loader style={{ fontSize: '80px' }} />}</div>
         {error && <ErrorAlert error={error} />}
-        <Container>{renderedPosts}</Container>
+        <Container>{renderedPosts()}</Container>
       </StyledHomeScreen>
     </Fragment>
   );

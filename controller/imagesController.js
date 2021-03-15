@@ -40,8 +40,9 @@ const getImagesByCategory = asyncHandler(async (req, res) => {
 });
 
 const createImage = asyncHandler(async (req, res) => {
-  const { img, category } = req.body;
+  const { img, category, title } = req.body;
   const image = new Photo({
+    title,
     img,
     category,
   });
@@ -50,9 +51,10 @@ const createImage = asyncHandler(async (req, res) => {
 });
 
 const updateImage = asyncHandler(async (req, res) => {
-  const { img, category } = req.body;
+  const { img, category, title } = req.body;
   const image = await Photo.findById(req.params.id);
   if (image) {
+    image.title = title;
     image.img = img;
     image.category = category;
     const updatedImage = await image.save();
