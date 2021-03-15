@@ -39,7 +39,14 @@ export const fetchPostsList = (debouncedKeyword = '') => async (dispatch) => {
   }
 };
 
-export const fetchPostDetail = (id) => async (dispatch) => {
+export const fetchPostDetail = (id) => async (dispatch, getState) => {
+  const {
+    postList: { posts },
+  } = getState();
+  const post = posts.find((_post) => _post._id === id);
+  if (post) {
+    return dispatch({ type: POST_DETAIL_SUCCESS, payload: post });
+  }
   try {
     dispatch({ type: POST_DETAIL_REQUEST });
     const { data } = await axios.get(`/api/posts/${id}`);

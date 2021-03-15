@@ -22,9 +22,8 @@ const PostScreen = ({ match, history }) => {
     error,
   } = useSelector((state) => state.postDetail);
   useEffect(() => {
-    if (!_id || _id !== match.params.id)
-      dispatch(fetchPostDetail(match.params.id));
-  }, [dispatch, match, _id]);
+    dispatch(fetchPostDetail(match.params.id));
+  }, [dispatch, match]);
 
   return (
     <Fragment>
