@@ -55,6 +55,10 @@ export const ListIcons = styled.ul`
   list-style: none;
 `;
 
+export const LogoIcon = styled.img`
+  width: 45px;
+`;
+
 export const Logo = styled.h1`
   font-weight: 200;
   font-size: 40px;
@@ -64,6 +68,7 @@ export const Logo = styled.h1`
 
 export const LogoLink = styled(Link)`
   text-decoration: none;
+  padding: 18px;
   color: ${({ theme }) => theme.primaryFontColor};
 `;
 

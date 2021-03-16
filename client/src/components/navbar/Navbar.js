@@ -8,13 +8,14 @@ import {
   StyledLink,
   LoginButton,
   StyledDashboard,
-  Logo,
+  LogoIcon,
   LogoLink,
   StyledSearchIcon,
   BurgerButton,
   RowContainer,
   LinksContainer,
 } from './Navbar.styled';
+import logo from '../../utils/favicon.png';
 
 const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   const ref = useRef();
@@ -43,7 +44,7 @@ const Navbar = ({ openHamburgerMenu, setOpenHamburgerMenu }) => {
   return (
     <StyledNavbar>
       <LogoLink to='/'>
-        <Logo>Logo</Logo>
+        <LogoIcon src={logo} alt='blog' />
       </LogoLink>
       <BurgerButton ref={ref}>
         <Hamburger
