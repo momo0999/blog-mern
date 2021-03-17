@@ -53,11 +53,15 @@ const SearchScreen = ({ history }) => {
           spellCheck={false}
         />
       </InputWrapper>
-      {!posts && <HeaderTextCenter>No blogs found</HeaderTextCenter>}
+      {posts.length === 0 && debouncedKeyword && (
+        <HeaderTextCenter>No blogs found</HeaderTextCenter>
+      )}
       <StyledHomeScreen>
         <div>{loading && <Loader style={{ fontSize: '80px' }} />}</div>
         {error && <ErrorAlert error={error} />}
-        <Container>{renderedPosts()}</Container>
+        {debouncedKeyword.length !== 0 && (
+          <Container>{renderedPosts()}</Container>
+        )}
       </StyledHomeScreen>
     </Fragment>
   );

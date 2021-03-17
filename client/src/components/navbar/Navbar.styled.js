@@ -9,7 +9,7 @@ export const StyledNavbar = styled.div`
   justify-content: space-between;
   align-items: center;
   min-height: 8vh;
-  max-width: 1400px;
+  max-width: 97%;
   margin: 0 auto;
   background-color: white;
   padding-bottom: 50px;
