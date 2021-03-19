@@ -10,7 +10,23 @@ import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
-connectDB();
+const PORT = process.env.PORT || 5000;
+
+const startServer = () => {
+  connectDB()
+    .then(() =>
+      app.listen(PORT, () =>
+        console.log(
+          `Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`
+        )
+      )
+    )
+    .catch((err) => {
+      console.log(err);
+      process.exit(1);
+    });
+};
+startServer();
 
 const app = express();
 
@@ -39,12 +55,3 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(notFound);
 app.use(errorHandler);
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(
-  PORT,
-  console.log(
-    `Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`
-  )
-);
